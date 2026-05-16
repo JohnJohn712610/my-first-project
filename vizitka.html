@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: center;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #0d1b6e 0%, #1565c0 45%, #29b6f6 100%);
+    background: linear-gradient(135deg, #0B2FBF 0%, #1A4FFF 50%, #4B85FF 100%);
     padding: 24px;
     overflow-x: hidden;
   }
@@ -60,18 +60,18 @@
 
   /* Avatar circle */
   .avatar {
-    width: 96px;
-    height: 96px;
+    width: 104px;
+    height: 104px;
     border-radius: 50%;
     margin: 0 auto 24px;
-    background: linear-gradient(135deg, #ffffff30, #ffffff10);
-    border: 2px solid rgba(255,255,255,0.4);
+    background: #1A4FFF;
+    border: 3px solid rgba(255,255,255,0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 38px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2), 0 0 0 6px rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 0 6px rgba(255,255,255,0.1);
     animation: avatarPulse 4s ease-in-out infinite;
+    overflow: hidden;
   }
 
   @keyframes avatarPulse {
@@ -210,7 +210,7 @@
     align-items: center;
     gap: 10px;
     background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
-    color: #1565c0;
+    color: #1A4FFF;
     font-size: 16px;
     font-weight: 700;
     text-decoration: none;
@@ -267,8 +267,18 @@
 
 <div class="card">
 
-  <!-- Avatar -->
-  <div class="avatar">🎓</div>
+  <!-- Avatar — логотип ИН.ЯЗ -->
+  <div class="avatar">
+    <svg viewBox="0 0 104 104" width="104" height="104" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="52" cy="52" r="52" fill="#1A4FFF"/>
+      <text x="52" y="44" text-anchor="middle" dominant-baseline="middle"
+            font-family="'Segoe UI', Arial, sans-serif" font-weight="900"
+            font-size="26" fill="white" letter-spacing="1">ИН.</text>
+      <text x="52" y="70" text-anchor="middle" dominant-baseline="middle"
+            font-family="'Segoe UI', Arial, sans-serif" font-weight="900"
+            font-size="28" fill="white" letter-spacing="2">ЯЗ</text>
+    </svg>
+  </div>
 
   <!-- Name -->
   <h1 class="name">Рессина Светлана<br>Владимировна</h1>
@@ -335,8 +345,8 @@
   <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener" class="cta">
     <!-- Paper plane icon -->
     <svg viewBox="0 0 24 24" fill="none">
-      <path d="M22 2L11 13" stroke="#1565c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M22 2L15 22l-4-9-9-4 20-7z" stroke="#1565c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M22 2L11 13" stroke="#1A4FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M22 2L15 22l-4-9-9-4 20-7z" stroke="#1A4FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     Написать мне
   </a>
