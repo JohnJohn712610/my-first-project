@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тарифы — Классный английский · ИН.ЯЗ</title>
+<meta name="description" content="Выберите формат занятий английским для вашего ребёнка. Три тарифа — от групповых уроков до полного сопровождения.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0B2FBF 0%, #1A4FFF 55%, #4B85FF 100%);
+    overflow-x: hidden;
+    color: white;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 25%, rgba(255,255,255,0.07) 1px, transparent 1px),
+      radial-gradient(circle at 85% 65%, rgba(255,255,255,0.07) 1px, transparent 1px),
+      radial-gradient(circle at 50% 8%,  rgba(255,255,255,0.05) 1px, transparent 1px),
+      radial-gradient(circle at 8%  80%, rgba(255,255,255,0.05) 1px, transparent 1px),
+      radial-gradient(circle at 92% 18%, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 280px 280px, 240px 240px, 380px 380px, 190px 190px, 330px 330px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 48px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: white; }
+  .back-link svg { width: 16px; height: 16px; }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 6px 18px 6px 12px;
+    margin-bottom: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #b3e5fc;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 8vw, 60px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    background: linear-gradient(90deg, #ffffff 0%, #b3e5fc 40%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .hero-desc {
+    font-size: clamp(15px, 3vw, 18px);
+    color: rgba(255,255,255,0.78);
+    line-height: 1.65;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── PRICING GRID ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 56px;
+  }
+
+  .plan {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 28px;
+    padding: 36px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  }
+
+  .plan:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 56px rgba(11,47,191,0.35);
+  }
+
+  /* Popular plan */
+  .plan.popular {
+    background: rgba(255,255,255,0.17);
+    border-color: rgba(255,255,255,0.40);
+    box-shadow: 0 8px 40px rgba(11,47,191,0.30), inset 0 1px 0 rgba(255,255,255,0.28);
+    position: relative;
+  }
+
+  .plan.popular:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 24px 64px rgba(11,47,191,0.40), inset 0 1px 0 rgba(255,255,255,0.28);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #FFB347, #FF8C00);
+    border-radius: 999px;
+    padding: 5px 20px;
+    font-size: 12px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(255,140,0,0.5);
+  }
+
+  .plan-name {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 12px;
+  }
+
+  .plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .price-num {
+    font-size: clamp(38px, 7vw, 52px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .price-currency {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .price-period {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 24px;
+  }
+
+  .plan-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.55;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex: 1;
+  }
+
+  .feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.45;
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .feature-icon svg { width: 11px; height: 11px; }
+
+  .plan.popular .feature-icon {
+    background: rgba(255,179,71,0.25);
+  }
+
+  .feature.disabled {
+    color: rgba(255,255,255,0.30);
+  }
+
+  .feature.disabled .feature-icon {
+    background: rgba(255,255,255,0.07);
+  }
+
+  .plan-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .plan-btn-outline {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: white;
+  }
+
+  .plan-btn-outline:hover {
+    background: rgba(255,255,255,0.20);
+    transform: translateY(-2px);
+  }
+
+  .plan-btn-solid {
+    background: linear-gradient(90deg, #FFB347 0%, #FF8C00 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(255,140,0,0.45);
+  }
+
+  .plan-btn-solid:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255,140,0,0.55);
+  }
+
+  /* ── FAQ-ROW ── */
+  .note-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 16px 24px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.78);
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .note-row svg { flex-shrink: 0; width: 18px; height: 18px; opacity: 0.7; }
+
+  /* ── FAQ ── */
+  .section-label {
+    text-align: center;
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 32px;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 64px;
+  }
+
+  .faq-item {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    line-height: 1.4;
+    font-family: inherit;
+  }
+
+  .faq-arrow {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, background 0.2s;
+  }
+
+  .faq-arrow svg { width: 12px; height: 12px; transition: transform 0.25s ease; }
+
+  .faq-item.open .faq-arrow { background: rgba(255,179,71,0.30); }
+  .faq-item.open .faq-arrow svg { transform: rotate(180deg); }
+
+  .faq-answer {
+    display: none;
+    padding: 0 24px 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.65;
+  }
+
+  .faq-item.open .faq-answer { display: block; }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 28px;
+    padding: 52px 36px;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: clamp(24px, 5vw, 38px);
+    font-weight: 900;
+    letter-spacing: -0.8px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .cta-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto 32px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #FFB347 0%, #FF8C00 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 16px 44px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(255,140,0,0.45);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 36px rgba(255,140,0,0.55);
+  }
+
+  .cta-sub {
+    margin-top: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.50);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .container { padding: 48px 16px 64px; }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plan.popular { margin-top: 14px; }
+
+    .cta-block { padding: 40px 20px; }
+
+    .note-row { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Back -->
+  <a href="landing.html" class="back-link">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 12L6 8l4-4"/>
+    </svg>
+    На главную
+  </a>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+      </svg>
+      Тарифы ИН.ЯЗ
+    </div>
+    <h1 class="hero-title">Выберите формат,<br>который подойдёт вашему ребёнку</h1>
+    <p class="hero-desc">Все тарифы включают живые уроки с преподавателем. Первое занятие — бесплатно, без обязательств.</p>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing-grid">
+
+    <!-- Базовый -->
+    <div class="plan">
+      <div class="plan-name">Базовый</div>
+      <div class="plan-price">
+        <span class="price-currency">₽</span>
+        <span class="price-num">3 500</span>
+      </div>
+      <div class="price-period">в месяц · 4 занятия</div>
+      <p class="plan-desc">Одно занятие в неделю — хороший старт. Подойдёт тем, кто только начинает или хочет поддерживать уровень без спешки.</p>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          1 урок в неделю (60 мин)
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Группа до 4 человек
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Домашнее задание после каждого урока
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Учебные материалы включены
+        </li>
+        <li class="feature disabled">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>
+          </span>
+          Проверка домашнего задания
+        </li>
+        <li class="feature disabled">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>
+          </span>
+          Отчёт для родителей
+        </li>
+      </ul>
+      <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener noreferrer" class="plan-btn plan-btn-outline">Записаться</a>
+    </div>
+
+    <!-- Оптимальный -->
+    <div class="plan popular">
+      <div class="popular-badge">Популярный выбор</div>
+      <div class="plan-name">Оптимальный</div>
+      <div class="plan-price">
+        <span class="price-currency">₽</span>
+        <span class="price-num">5 900</span>
+      </div>
+      <div class="price-period">в месяц · 8 занятий</div>
+      <p class="plan-desc">Два урока в неделю — оптимальный темп для реального прогресса. Преподаватель проверяет домашку и объясняет ошибки.</p>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          2 урока в неделю (60 мин)
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Группа до 4 человек
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Домашнее задание + проверка
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Учебные материалы включены
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Ежемесячный отчёт для родителей
+        </li>
+        <li class="feature disabled">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>
+          </span>
+          Индивидуальный план обучения
+        </li>
+      </ul>
+      <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener noreferrer" class="plan-btn plan-btn-solid">Записаться</a>
+    </div>
+
+    <!-- Максимум -->
+    <div class="plan">
+      <div class="plan-name">Максимум</div>
+      <div class="plan-price">
+        <span class="price-currency">₽</span>
+        <span class="price-num">9 500</span>
+      </div>
+      <div class="price-period">в месяц · 8 занятий</div>
+      <p class="plan-desc">Индивидуальные уроки: только ваш ребёнок, полное внимание преподавателя. Идеально для подготовки к ОГЭ/ЕГЭ или быстрого старта с нуля.</p>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          2 урока в неделю (60 мин)
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Индивидуальный формат (1 на 1)
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Домашнее задание + детальная проверка
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Учебные материалы включены
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Еженедельный отчёт для родителей
+        </li>
+        <li class="feature">
+          <span class="feature-icon">
+            <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6l3 3 5-5"/></svg>
+          </span>
+          Индивидуальный план обучения
+        </li>
+      </ul>
+      <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener noreferrer" class="plan-btn plan-btn-outline">Записаться</a>
+    </div>
+
+  </div>
+
+  <!-- Note -->
+  <div class="note-row">
+    <svg viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+    </svg>
+    Первое пробное занятие — бесплатно для всех тарифов. Занятия проходят онлайн, расписание согласовывается индивидуально.
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="section-label">Частые вопросы</h2>
+
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Как проходит пробное занятие?
+        <span class="faq-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l4 4 4-4"/></svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        Пробный урок бесплатный — преподаватель знакомится с ребёнком, проверяет уровень и объясняет, по какой программе лучше заниматься. Длится 45–60 минут. После него вы решаете, подходит ли формат.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Можно ли сменить тариф?
+        <span class="faq-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l4 4 4-4"/></svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        Да. Если хотите перейти на другой тариф — напишите в Telegram, пересчитаем со следующего месяца. Никаких штрафов и лишних бюрократий.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Что если ребёнок пропустил занятие?
+        <span class="faq-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l4 4 4-4"/></svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        Пропущенный урок переносится на другое время. Главное — предупредить за 24 часа. Если предупреждения не было, занятие не переносится.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Для какого возраста подходят занятия?
+        <span class="faq-arrow">
+          <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l4 4 4-4"/></svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        Занимаемся со школьниками 5–11 классов (10–17 лет). Есть группы для подготовки к ОГЭ и ЕГЭ, а также общие группы для тех, кто хочет подтянуть оценки или просто заговорить увереннее.
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2 class="cta-title">Ещё не решили?<br>Приходите на пробный урок</h2>
+    <p class="cta-desc">Бесплатно, без обязательств. Ребёнок познакомится с преподавателем, а вы поймёте — подходит ли формат.</p>
+    <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener noreferrer" class="cta-btn">Записаться бесплатно</a>
+    <p class="cta-sub">Ответим в Telegram — обычно в течение часа</p>
+  </div>
+
+</div>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
