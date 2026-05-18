@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Классный английский — Языковая школа ИН.ЯЗ</title>
+<meta name="description" content="Онлайн-занятия английским для школьников и подростков. Готовим к ОГЭ и ЕГЭ. Оценки растут уже в первые месяцы. Запишитесь на бесплатный пробный урок.">
+<meta property="og:title" content="Классный английский — Языковая школа ИН.ЯЗ">
+<meta property="og:description" content="Онлайн-занятия английским для школьников 5–11 классов. Подготовка к ОГЭ и ЕГЭ. Бесплатный пробный урок.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.instagram.com/ressinaschool">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -43,7 +48,6 @@
   .hero {
     text-align: center;
     margin-bottom: 72px;
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .badge {
@@ -85,6 +89,25 @@
     margin: 0 auto 28px;
   }
 
+  .hero-cta-btn {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    padding: 12px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .hero-cta-btn:hover {
+    background: rgba(255,255,255,0.28);
+    transform: translateY(-2px);
+  }
+
   .hero-tags {
     display: flex;
     flex-wrap: wrap;
@@ -110,7 +133,6 @@
     font-weight: 800;
     color: white;
     margin-bottom: 36px;
-    animation: fadeUp 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   /* ── ADVANTAGE CARDS ── */
@@ -119,7 +141,6 @@
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 20px;
     margin-bottom: 72px;
-    animation: fadeUp 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .card {
@@ -180,7 +201,6 @@
     padding: 44px 40px;
     margin-bottom: 72px;
     box-shadow: 0 4px 28px rgba(11,47,191,0.22), inset 0 1px 0 rgba(255,255,255,0.2);
-    animation: fadeUp 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .audience-title {
@@ -223,10 +243,185 @@
 
   .audience-item strong { color: #ffffff; font-weight: 700; }
 
+  /* ── TEACHER ── */
+  .teacher {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 30px;
+    padding: 44px 40px;
+    margin-bottom: 72px;
+    box-shadow: 0 4px 28px rgba(11,47,191,0.22), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .teacher-avatar {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1A4FFF;
+    border: 3px solid rgba(255,255,255,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 0 6px rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+
+  .teacher-body { flex: 1; }
+
+  .teacher-name {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .teacher-role {
+    font-size: 13px;
+    font-weight: 700;
+    color: #b3e5fc;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .teacher-bio {
+    font-size: 15px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.7;
+  }
+
+  .teacher-bio strong { color: white; font-weight: 700; }
+
+  .teacher-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+  }
+
+  @media (max-width: 620px) {
+    .teacher { flex-direction: column; text-align: center; padding: 32px 22px; gap: 24px; }
+    .teacher-stats { justify-content: center; }
+  }
+
+  /* ── REVIEWS ── */
+  .reviews {
+    margin-bottom: 72px;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 26px;
+    padding: 30px 26px 26px;
+    box-shadow: 0 4px 28px rgba(11,47,191,0.18), inset 0 1px 0 rgba(255,255,255,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(11,47,191,0.28), inset 0 1px 0 rgba(255,255,255,0.24);
+  }
+
+  .review-quote {
+    font-size: 32px;
+    line-height: 1;
+    color: rgba(179,229,252,0.6);
+    font-family: Georgia, serif;
+    margin-bottom: -6px;
+  }
+
+  .review-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .review-initials {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .review-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+  }
+
+  .review-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.48);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 620px) {
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── CTA ── */
   .cta-section {
     text-align: center;
-    animation: fadeUp 0.7s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* scroll-reveal base state */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .cta-heading {
@@ -242,6 +437,27 @@
     color: rgba(255,255,255,0.68);
     margin-bottom: 36px;
     line-height: 1.6;
+  }
+
+  .price-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .price-amount {
+    font-size: clamp(36px, 8vw, 52px);
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .price-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
   }
 
   .cta-btn {
@@ -292,12 +508,79 @@
 
   .contact-link {
     font-size: 14px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.75);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
-  .contact-link:hover { color: rgba(255,255,255,0.88); }
+  .contact-link:hover { color: #ffffff; }
+
+  /* ── PHONE FORM ── */
+  .phone-form {
+    margin: 24px auto 0;
+    max-width: 480px;
+  }
+
+  .phone-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .phone-input {
+    flex: 1;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 999px;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-family: inherit;
+    color: white;
+    outline: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .phone-input::placeholder { color: rgba(255,255,255,0.45); }
+
+  .phone-input:focus {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.55);
+  }
+
+  .phone-btn {
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.32);
+    border-radius: 999px;
+    padding: 14px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .phone-btn:hover {
+    background: rgba(255,255,255,0.26);
+    transform: translateY(-2px);
+  }
+
+  .phone-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    min-height: 18px;
+    transition: color 0.2s;
+  }
+
+  .phone-note.success { color: #b3e5fc; font-weight: 600; }
+  .phone-note.error   { color: #ff8a80; }
+
+  @media (max-width: 480px) {
+    .phone-row { flex-direction: column; }
+    .phone-btn { width: 100%; }
+  }
 
   /* ── FOOTER ── */
   .footer {
@@ -338,7 +621,7 @@
 <div class="container">
 
   <!-- ── HERO ── -->
-  <section class="hero">
+  <section class="hero reveal">
 
     <div class="badge">
       <svg viewBox="0 0 20 20" fill="none" width="16" height="16">
@@ -352,14 +635,15 @@
     <h1 class="hero-title">Классный<br>английский</h1>
 
     <p class="hero-desc">
-      Онлайн-занятия английским и китайским языком для школьников и подростков.
+      Онлайн-занятия английским языком для школьников и подростков.
       Интересно. Увлекательно. Доступно. С результатом, который виден в четверти.
     </p>
+
+    <a href="#cta" class="hero-cta-btn">Записаться на пробный урок →</a>
 
     <div class="hero-tags">
       <span class="tag">Онлайн</span>
       <span class="tag">Английский</span>
-      <span class="tag">Китайский</span>
       <span class="tag">Школьники и подростки</span>
       <span class="tag">ОГЭ и ЕГЭ</span>
     </div>
@@ -367,9 +651,9 @@
   </section>
 
   <!-- ── ADVANTAGES ── -->
-  <h2 class="section-label">Почему именно мы?</h2>
+  <h2 class="section-label reveal">Почему именно мы?</h2>
 
-  <div class="cards">
+  <div class="cards reveal">
 
     <!-- Card 1: результат в школе -->
     <div class="card">
@@ -429,7 +713,7 @@
   </div>
 
   <!-- ── FOR WHOM ── -->
-  <section class="audience">
+  <section class="audience reveal">
 
     <h2 class="audience-title">Для кого подходит?</h2>
 
@@ -456,7 +740,7 @@
           </svg>
         </div>
         <span>
-          <strong>Подросткам 10–11 классов</strong>, готовящимся к ОГЭ и ЕГЭ —
+          <strong>Подросткам 9 и 11 классов</strong>, готовящимся к ОГЭ и ЕГЭ —
           сдадите профильный экзамен без головной боли и поступите туда, куда хотите
         </span>
       </li>
@@ -483,7 +767,7 @@
         </div>
         <span>
           <strong>Тем, кто мечтает о блестящей карьере</strong> —
-          английский (и китайский!) откроют двери, которые закрыты для остальных
+          английский откроет двери, которые закрыты для остальных
         </span>
       </li>
 
@@ -491,14 +775,110 @@
 
   </section>
 
+  <!-- ── TEACHER ── -->
+  <section class="teacher reveal">
+
+    <div class="teacher-avatar">
+      <!-- SVG-логотип ИН.ЯЗ как заглушка — заменить на фото -->
+      <svg viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg" width="104" height="104">
+        <rect width="104" height="104" fill="#1A4FFF"/>
+        <text x="52" y="38" text-anchor="middle" font-family="'Segoe UI',sans-serif"
+              font-size="22" font-weight="900" fill="white" letter-spacing="-0.5">ИН.</text>
+        <text x="52" y="68" text-anchor="middle" font-family="'Segoe UI',sans-serif"
+              font-size="22" font-weight="900" fill="white" letter-spacing="-0.5">ЯЗ</text>
+      </svg>
+    </div>
+
+    <div class="teacher-body">
+      <h2 class="teacher-name">Рессина Светлана Владимировна</h2>
+      <p class="teacher-role">Основатель школы ИН.ЯЗ · Преподаватель</p>
+      <p class="teacher-bio">
+        Преподаю английский язык <strong>более 8 лет</strong>.
+        Окончила МГЛУ (факультет иностранных языков).
+        Веду занятия для школьников и подростков — помогаю не просто подтянуть оценки,
+        а полюбить язык и говорить на нём уверенно.
+      </p>
+      <div class="teacher-stats">
+        <span class="stat">Более 8 лет опыта</span>
+        <span class="stat">97% улучшают оценку за четверть</span>
+        <span class="stat">Английский язык</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section class="reviews reveal">
+
+    <h2 class="section-label">Что говорят родители</h2>
+
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">
+          Дочь два года боялась английского, отказывалась отвечать у доски. После трёх месяцев
+          со Светланой сама попросила записаться на олимпиаду. Оценка выросла с тройки до пятёрки,
+          но главное — она перестала бояться.
+        </p>
+        <div class="review-author">
+          <div class="review-initials">МИ</div>
+          <div>
+            <div class="review-name">Мария Иванова</div>
+            <div class="review-meta">мама · 7 класс</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">
+          Сын готовился к ОГЭ, паниковал из-за устной части. Светлана разобрала каждый блок
+          по-человечески, без зубрёжки. Сдал на 4, хотя сами рассчитывали максимум на тройку.
+          Рекомендую всем, кто готовится к экзаменам.
+        </p>
+        <div class="review-author">
+          <div class="review-initials">ОС</div>
+          <div>
+            <div class="review-name">Ольга Смирнова</div>
+            <div class="review-meta">мама · 9 класс · ОГЭ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">
+          Пробовали трёх репетиторов до ИН.ЯЗ — ребёнок каждый раз через месяц говорил «скучно».
+          Здесь занимается уже полгода и сам напоминает, когда урок. Формат живой, Светлана
+          умеет держать внимание подростка — это редкость.
+        </p>
+        <div class="review-author">
+          <div class="review-initials">АК</div>
+          <div>
+            <div class="review-name">Алексей Козлов</div>
+            <div class="review-meta">папа · 8 класс</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
   <!-- ── CTA ── -->
-  <section class="cta-section">
+  <section class="cta-section reveal" id="cta">
 
     <h2 class="cta-heading">Запишитесь на бесплатный<br>пробный урок</h2>
     <p class="cta-sub">
       Одного занятия достаточно, чтобы ребёнок влюбился в язык.<br>
       Без обязательств — просто попробуйте.
     </p>
+
+    <div class="price-tag">
+      <span class="price-amount">2 000 ₽</span>
+      <span class="price-label">/ занятие · первое бесплатно</span>
+    </div>
 
     <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener" class="cta-btn">
       <svg viewBox="0 0 24 24" fill="none">
@@ -508,6 +888,15 @@
       </svg>
       Записаться на пробный урок
     </a>
+
+    <form class="phone-form" onsubmit="handlePhoneSubmit(event)">
+      <div class="phone-row">
+        <input class="phone-input" type="tel" placeholder="Ваш телефон или WhatsApp"
+               autocomplete="tel" inputmode="tel" maxlength="20">
+        <button class="phone-btn" type="submit">Напишите мне</button>
+      </div>
+      <p class="phone-note" id="phone-note"></p>
+    </form>
 
     <div class="contact-links">
       <a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener" class="contact-link">
@@ -523,9 +912,42 @@
 
   </section>
 
-  <p class="footer">© 2025 · Языковая школа ИН.ЯЗ · Рессина Светлана Владимировна</p>
+  <p class="footer">© 2026 · Языковая школа ИН.ЯЗ · Рессина Светлана Владимировна</p>
 
 </div>
 
+<script>
+// Scroll-reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+      observer.unobserve(el.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function handlePhoneSubmit(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('.phone-input');
+  const note  = document.getElementById('phone-note');
+  const val   = input.value.trim();
+
+  if (val.length < 6) {
+    note.textContent = 'Пожалуйста, введите номер телефона';
+    note.className = 'phone-note error';
+    return;
+  }
+
+  const text = encodeURIComponent('Здравствуйте! Оставляю номер для связи: ' + val);
+  window.open('https://t.me/SvetlanaReSSina?text=' + text, '_blank');
+
+  input.value = '';
+  note.textContent = 'Спасибо! Открываем Telegram — Светлана напишет вам в ближайшее время.';
+  note.className = 'phone-note success';
+}
+</script>
 </body>
 </html>
