@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Успеет ли ребёнок к ОГЭ/ЕГЭ — ИН.ЯЗ</title>
+  <meta name="description" content="Калькулятор подготовки к ОГЭ и ЕГЭ по английскому. Узнайте, хватит ли времени и сколько уроков нужно.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0B2FBF 0%, #1A4FFF 55%, #4B85FF 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 40px;
+    }
+
+    /* Шапка */
+    .brand {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .brand-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .brand h1 {
+      font-size: clamp(20px, 5vw, 26px);
+      font-weight: 800;
+    }
+    .brand p {
+      font-size: 14px;
+      opacity: 0.62;
+      margin-top: 4px;
+    }
+
+    /* Карточка */
+    .card {
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 34px 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,30,0.25);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .card-sub {
+      font-size: 13px;
+      opacity: 0.55;
+      margin-bottom: 28px;
+    }
+
+    /* Группа полей */
+    .field { margin-bottom: 22px; }
+    .field-label {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+
+    /* Кнопки-выборщики */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pick-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.14);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 14px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.18s;
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      font-weight: 500;
+    }
+    .pick-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .pick-btn.active {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.7);
+      font-weight: 700;
+    }
+
+    /* Разделитель */
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 24px 0;
+    }
+
+    /* Кнопка «Рассчитать» */
+    .btn-calc {
+      width: 100%;
+      background: #fff;
+      color: #1A4FFF;
+      border: none;
+      border-radius: 999px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-calc:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .btn-calc:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Ошибка */
+    .error-msg {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,200,100,0.9);
+      margin-top: 10px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    /* ────── РЕЗУЛЬТАТ ────── */
+    .result-block {
+      margin-top: 28px;
+      display: none;
+      animation: fadeUp 0.4s ease;
+    }
+    .result-block.show { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Вердикт */
+    .verdict {
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .verdict.good  { background: rgba(80,220,120,0.18); border: 1.5px solid rgba(80,220,120,0.4); }
+    .verdict.ok    { background: rgba(250,200,50,0.18);  border: 1.5px solid rgba(250,200,50,0.4); }
+    .verdict.warn  { background: rgba(255,100,80,0.18);  border: 1.5px solid rgba(255,100,80,0.4); }
+    .verdict-icon  { font-size: 28px; flex-shrink: 0; }
+    .verdict-text  { font-size: 16px; font-weight: 700; line-height: 1.4; }
+    .verdict-sub   { font-size: 13px; opacity: 0.75; margin-top: 2px; }
+
+    /* Статистика */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 4px;
+    }
+
+    /* Уровень: прогресс */
+    .level-bar-wrap {
+      background: rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+    }
+    .level-bar-title {
+      font-size: 12px;
+      opacity: 0.55;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .level-dots {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .level-line {
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 3px;
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    .level-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .level-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.25);
+      transition: all 0.3s;
+    }
+    .level-dot.current {
+      background: rgba(255,255,255,0.5);
+      border-color: #fff;
+      transform: scale(1.2);
+    }
+    .level-dot.target {
+      background: #fff;
+      border-color: #fff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.6);
+      transform: scale(1.3);
+    }
+    .level-dot-label {
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0.65;
+    }
+    .level-dot-label.current,
+    .level-dot-label.target { opacity: 1; }
+    .level-dot-badge {
+      font-size: 10px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 999px;
+      padding: 1px 7px;
+      margin-top: -2px;
+    }
+
+    /* Рекомендации */
+    .recs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .rec-item {
+      background: rgba(255,255,255,0.07);
+      border-radius: 11px;
+      padding: 10px 14px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .rec-num {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* CTA */
+    .btn-cta {
+      display: block; width: 100%;
+      background: #fff; color: #1A4FFF;
+      border: none; border-radius: 999px;
+      padding: 15px; font-size: 16px; font-weight: 800;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.2s;
+      text-align: center;
+      margin-bottom: 10px;
+      animation: ctaPulse 2s ease-in-out infinite;
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+      50% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+    }
+    .btn-cta:hover { transform: translateY(-2px); animation: none; }
+    .result-note { text-align: center; font-size: 12px; opacity: 0.4; }
+
+    /* Ссылка назад */
+    .back-link {
+      margin-top: 20px;
+      font-size: 13px;
+      opacity: 0.5;
+      text-align: center;
+    }
+    .back-link a { color: #fff; text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .card { padding: 22px 16px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .pick-btn { min-width: 90px; font-size: 13px; padding: 9px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brand">
+    <div class="brand-badge">🎓 Языковая школа ИН.ЯЗ</div>
+    <h1>Успеет ли ребёнок к ОГЭ / ЕГЭ?</h1>
+    <p>Заполните 4 поля — получите прогноз за 10 секунд</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Калькулятор подготовки</div>
+    <div class="card-sub">Считаем по реальным данным: сколько уроков нужно, какой балл реален</div>
+
+    <!-- 1. Экзамен -->
+    <div class="field">
+      <div class="field-label">1. Какой экзамен сдаёт ребёнок?</div>
+      <div class="btn-row">
+        <button class="pick-btn" data-g="exam" data-v="oge">ОГЭ (9 класс)</button>
+        <button class="pick-btn" data-g="exam" data-v="ege">ЕГЭ (11 класс)</button>
+        <button class="pick-btn" data-g="exam" data-v="none">Без экзамена</button>
+      </div>
+    </div>
+
+    <!-- 2. Месяцев до экзамена -->
+    <div class="field">
+      <div class="field-label">2. Сколько месяцев до экзамена?</div>
+      <div class="btn-row">
+        <button class="pick-btn" data-g="months" data-v="2">1–3 мес.</button>
+        <button class="pick-btn" data-g="months" data-v="5">4–6 мес.</button>
+        <button class="pick-btn" data-g="months" data-v="9">7–12 мес.</button>
+        <button class="pick-btn" data-g="months" data-v="15">Больше года</button>
+      </div>
+    </div>
+
+    <!-- 3. Уровень -->
+    <div class="field">
+      <div class="field-label">3. Текущий уровень английского</div>
+      <div class="btn-row">
+        <button class="pick-btn" data-g="level" data-v="0">😬 Почти нулевой</button>
+        <button class="pick-btn" data-g="level" data-v="1">📗 Базовый (A1–A2)</button>
+        <button class="pick-btn" data-g="level" data-v="2">📘 Средний (A2–B1)</button>
+        <button class="pick-btn" data-g="level" data-v="3">📙 Выше среднего (B1+)</button>
+      </div>
+    </div>
+
+    <!-- 4. Уроков в неделю -->
+    <div class="field">
+      <div class="field-label">4. Сколько уроков в неделю планируете?</div>
+      <div class="btn-row">
+        <button class="pick-btn" data-g="freq" data-v="1">1 урок</button>
+        <button class="pick-btn" data-g="freq" data-v="2">2 урока</button>
+        <button class="pick-btn" data-g="freq" data-v="3">3 урока</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <button class="btn-calc" id="calcBtn" onclick="calculate()">Рассчитать →</button>
+    <div class="error-msg" id="errMsg">Пожалуйста, ответьте на все 4 вопроса</div>
+
+    <!-- Результат -->
+    <div class="result-block" id="result">
+
+      <div class="verdict" id="verdictBox">
+        <div class="verdict-icon" id="verdictIcon"></div>
+        <div>
+          <div class="verdict-text" id="verdictText"></div>
+          <div class="verdict-sub" id="verdictSub"></div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-val" id="statLessons">—</div>
+          <div class="stat-label">уроков за это время</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="statScore">—</div>
+          <div class="stat-label" id="statScoreLabel">прогноз баллов</div>
+        </div>
+      </div>
+
+      <!-- Уровень: было → станет -->
+      <div class="level-bar-wrap">
+        <div class="level-bar-title">Прогресс уровня</div>
+        <div class="level-dots">
+          <div class="level-line"></div>
+          <div class="level-dot-wrap" id="dot0">
+            <div class="level-dot"></div>
+            <div class="level-dot-label">A0</div>
+          </div>
+          <div class="level-dot-wrap" id="dot1">
+            <div class="level-dot"></div>
+            <div class="level-dot-label">A1</div>
+          </div>
+          <div class="level-dot-wrap" id="dot2">
+            <div class="level-dot"></div>
+            <div class="level-dot-label">A2</div>
+          </div>
+          <div class="level-dot-wrap" id="dot3">
+            <div class="level-dot"></div>
+            <div class="level-dot-label">B1</div>
+          </div>
+          <div class="level-dot-wrap" id="dot4">
+            <div class="level-dot"></div>
+            <div class="level-dot-label">B2</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Рекомендации -->
+      <div class="recs" id="recsList"></div>
+
+      <a class="btn-cta" id="ctaBtn" href="#" target="_blank">📩 Записаться на бесплатный урок</a>
+      <div class="result-note">Первый урок — бесплатно. Разберём план подготовки вместе.</div>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="landing.html">← На главную</a>
+    &nbsp;·&nbsp;
+    <a href="quiz.html">Пройти тест на уровень →</a>
+  </div>
+
+  <script>
+    const TG = 'SvetlanaReSSina';
+
+    // Состояние выборов
+    const sel = { exam: null, months: null, level: null, freq: null };
+
+    // Клики по кнопкам-выборщикам
+    document.querySelectorAll('.pick-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll(`[data-g="${btn.dataset.g}"]`)
+          .forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const raw = btn.dataset.v;
+        const num = parseFloat(raw);
+        sel[btn.dataset.g] = isNaN(num) ? raw : num;
+        document.getElementById('errMsg').classList.remove('show');
+      });
+    });
+
+    // ─── Расчётная логика ───────────────────────────────────────────────────
+
+    // Уроков для перехода на следующий уровень (0→1, 1→2, 2→3, 3→4)
+    const STEPS = [28, 42, 60, 85];
+
+    // Названия уровней
+    const LEVEL_NAMES = ['A0', 'A1', 'A2', 'B1', 'B2'];
+
+    // Прогноз баллов [min, max] по конечному уровню
+    const OGE  = [[22,30], [36,46], [50,62], [64,76], [78,92]];
+    const EGE  = [[18,26], [30,40], [43,56], [58,70], [72,86]];
+
+    function calcEndLevel(startLevel, totalLessons) {
+      let lvl = startLevel;
+      let rem = totalLessons;
+      while (lvl < 4 && rem >= STEPS[lvl]) {
+        rem -= STEPS[lvl];
+        lvl++;
+      }
+      return lvl;
+    }
+
+    function calculate() {
+      if (Object.values(sel).some(v => v === null)) {
+        document.getElementById('errMsg').classList.add('show');
+        return;
+      }
+
+      const { exam, months, level: startLvl, freq } = sel;
+
+      // Общее кол-во уроков (4.3 недели в месяце)
+      const totalLessons = Math.round(freq * 4.3 * months);
+
+      // Конечный уровень
+      const endLvl = calcEndLevel(startLvl, totalLessons);
+
+      // Прогноз балла
+      let scoreText = '—';
+      let scoreLabelText = 'ожидаемый уровень';
+
+      if (exam === 'oge') {
+        const s = OGE[endLvl];
+        scoreText = `${s[0]}–${s[1]}`;
+        scoreLabelText = 'баллов на ОГЭ';
+      } else if (exam === 'ege') {
+        const s = EGE[endLvl];
+        scoreText = `${s[0]}–${s[1]}`;
+        scoreLabelText = 'баллов на ЕГЭ';
+      } else {
+        scoreText = LEVEL_NAMES[endLvl];
+        scoreLabelText = 'уровень к концу';
+      }
+
+      // Вердикт
+      let vClass, vIcon, vMain, vSub;
+
+      if (exam === 'oge') {
+        if (endLvl >= 3) {
+          vClass = 'good'; vIcon = '✅';
+          vMain = 'Хватит для хорошего результата';
+          vSub = `${totalLessons} уроков — выйдем на ${LEVEL_NAMES[endLvl]}. Реально 64+ баллов.`;
+        } else if (endLvl >= 2) {
+          vClass = 'ok'; vIcon = '👍';
+          vMain = 'Реально сдать, нужна дисциплина';
+          vSub = 'Дойдём до A2–B1. Хватит для минимального прохода, но лучше добавить урок.';
+        } else {
+          vClass = 'warn'; vIcon = '⚡';
+          vMain = 'Нужно начинать прямо сейчас';
+          vSub = 'Времени мало. Рекомендуем 2–3 урока в неделю + домашние задания.';
+        }
+      } else if (exam === 'ege') {
+        if (endLvl >= 4) {
+          vClass = 'good'; vIcon = '✅';
+          vMain = 'Реально набрать 72+ балла';
+          vSub = `${totalLessons} уроков — отличный задел. При усердии — выше 80.`;
+        } else if (endLvl >= 3) {
+          vClass = 'ok'; vIcon = '👍';
+          vMain = 'Хватит для твёрдого прохода';
+          vSub = 'Достигнем B1. Для высокого балла рекомендуем добавить частоту занятий.';
+        } else {
+          vClass = 'warn'; vIcon = '⚡';
+          vMain = 'Сложно — нужен интенсив';
+          vSub = 'Пока до экзамена далеко — начинаем сейчас и можно успеть.';
+        }
+      } else {
+        if (endLvl - startLvl >= 2) {
+          vClass = 'good'; vIcon = '🚀';
+          vMain = `Отличный прогресс: ${LEVEL_NAMES[startLvl]} → ${LEVEL_NAMES[endLvl]}`;
+          vSub = 'Ребёнок заметно вырастет за это время при регулярных занятиях.';
+        } else if (endLvl > startLvl) {
+          vClass = 'ok'; vIcon = '📈';
+          vMain = `Хороший рост: ${LEVEL_NAMES[startLvl]} → ${LEVEL_NAMES[endLvl]}`;
+          vSub = 'Один уровень вверх — это уверенный результат. Можно больше с бо́льшей частотой.';
+        } else {
+          vClass = 'warn'; vIcon = '💡';
+          vMain = 'Добавьте ещё один урок в неделю';
+          vSub = 'С 1 уроком прогресс медленный. Два урока — и уровень точно изменится.';
+        }
+      }
+
+      // Рекомендации
+      const recs = buildRecs(exam, startLvl, endLvl, months, freq);
+
+      // Сообщение в Telegram
+      const examLabel = exam === 'oge' ? 'ОГЭ' : exam === 'ege' ? 'ЕГЭ' : 'без экзамена';
+      const tgMsg = `Здравствуйте! Воспользовались калькулятором на сайте. `
+        + `Экзамен: ${examLabel}. Уровень: ${LEVEL_NAMES[startLvl]}. `
+        + `До экзамена ~${months} мес. Хотим записаться на бесплатный пробный урок.`;
+
+      // ─── Рендер ─────────────────────────────────────────────────────────
+
+      // Вердикт
+      const vBox = document.getElementById('verdictBox');
+      vBox.className = `verdict ${vClass}`;
+      document.getElementById('verdictIcon').textContent = vIcon;
+      document.getElementById('verdictText').textContent = vMain;
+      document.getElementById('verdictSub').textContent = vSub;
+
+      // Статистика
+      document.getElementById('statLessons').textContent = totalLessons;
+      document.getElementById('statScore').textContent = scoreText;
+      document.getElementById('statScoreLabel').textContent = scoreLabelText;
+
+      // Уровень-прогресс
+      for (let i = 0; i <= 4; i++) {
+        const wrap = document.getElementById(`dot${i}`);
+        const dot  = wrap.querySelector('.level-dot');
+        const lbl  = wrap.querySelector('.level-dot-label');
+        // Убираем старые классы
+        dot.className = 'level-dot';
+        lbl.className = 'level-dot-label';
+        // Удаляем старые бейджи
+        const oldBadge = wrap.querySelector('.level-dot-badge');
+        if (oldBadge) oldBadge.remove();
+
+        if (i === startLvl) {
+          dot.classList.add('current');
+          lbl.classList.add('current');
+          const badge = document.createElement('div');
+          badge.className = 'level-dot-badge';
+          badge.textContent = 'сейчас';
+          wrap.appendChild(badge);
+        }
+        if (i === endLvl && endLvl !== startLvl) {
+          dot.classList.add('target');
+          lbl.classList.add('target');
+          const badge = document.createElement('div');
+          badge.className = 'level-dot-badge';
+          badge.textContent = 'будет';
+          wrap.appendChild(badge);
+        }
+      }
+
+      // Рекомендации
+      const recsEl = document.getElementById('recsList');
+      recsEl.innerHTML = '';
+      recs.forEach((r, i) => {
+        const d = document.createElement('div');
+        d.className = 'rec-item';
+        d.innerHTML = `<span class="rec-num">${i+1}</span>${r}`;
+        recsEl.appendChild(d);
+      });
+
+      // CTA
+      document.getElementById('ctaBtn').href =
+        `https://t.me/${TG}?text=${encodeURIComponent(tgMsg)}`;
+
+      // Показываем результат
+      const resultEl = document.getElementById('result');
+      resultEl.classList.add('show');
+      setTimeout(() => resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+
+    function buildRecs(exam, start, end, months, freq) {
+      const recs = [];
+
+      if (freq === 1 && months <= 6) {
+        recs.push('Увеличить занятия до 2 раз в неделю — это удвоит результат');
+      }
+      if (start === 0) {
+        recs.push('Начать с фонетики и базовых 300 слов — это фундамент всего остального');
+      }
+      if (exam === 'oge' && end < 3) {
+        recs.push('Сосредоточиться на грамматике Present/Past/Future — это 40% заданий ОГЭ');
+        recs.push('Практиковать аудирование каждый день по 15 минут');
+      }
+      if (exam === 'ege' && end < 3) {
+        recs.push('Проработать все разделы ЕГЭ: чтение, аудирование, письмо, говорение');
+        recs.push('Решать минимум 2 варианта ОГЭ/ЕГЭ в месяц — привыкать к формату');
+      }
+      if (exam === 'ege' && end >= 3) {
+        recs.push('Развивать Speaking — устная часть ЕГЭ даёт до 20 баллов');
+      }
+      recs.push('Делать домашние задания между уроками — без этого прогресс вдвое медленнее');
+
+      return recs.slice(0, 3);
+    }
+  </script>
+
+</body>
+</html>

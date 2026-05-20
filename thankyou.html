@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Заявка принята — ИН.ЯЗ</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue1: #0B2FBF;
+    --blue2: #1A4FFF;
+    --blue3: #4B85FF;
+    --orange: #FF8C00;
+    --glass: rgba(255,255,255,0.10);
+    --glass-border: rgba(255,255,255,0.18);
+    --text: #E8EEFF;
+    --muted: rgba(232,238,255,0.65);
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #060E2B 0%, #0B2FBF 50%, #091A6E 100%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    overflow-x: hidden;
+  }
+
+  /* Particles */
+  .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(75,133,255,0.15);
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0%   { transform: translateY(110vh) scale(0); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+  }
+
+  .page { position: relative; z-index: 1; width: 100%; max-width: 560px; }
+
+  /* Logo */
+  .logo {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .logo span { color: var(--blue3); }
+
+  /* Success icon */
+  .success-icon {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 28px;
+    background: rgba(75,133,255,0.15);
+    border: 2px solid var(--blue3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+    opacity: 0;
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.15s forwards;
+  }
+  @keyframes popIn {
+    0%   { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Main card */
+  .card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.3s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .card h1 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .card h1 em {
+    font-style: normal;
+    color: var(--blue3);
+  }
+
+  .card .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 32px;
+  }
+
+  /* Timeline */
+  .timeline { text-align: left; margin-bottom: 32px; }
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .tl-item:nth-child(1) { animation-delay: 0.45s; }
+  .tl-item:nth-child(2) { animation-delay: 0.60s; }
+  .tl-item:nth-child(3) { animation-delay: 0.75s; }
+  .tl-item:nth-child(4) { animation-delay: 0.90s; }
+
+  .tl-dot {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(75,133,255,0.18);
+    border: 1.5px solid var(--blue3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+  }
+  .tl-text strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .tl-text span {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .tl-timing {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--blue3);
+    background: rgba(75,133,255,0.12);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: 0 0 28px;
+  }
+
+  /* Reassurance block */
+  .reassure {
+    background: rgba(75,133,255,0.08);
+    border: 1px solid rgba(75,133,255,0.22);
+    border-radius: 12px;
+    padding: 16px 18px;
+    text-align: left;
+    margin-bottom: 28px;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.55;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1.05s forwards;
+  }
+  .reassure strong { color: var(--text); }
+
+  /* CTA */
+  .cta-wrap {
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1.15s forwards;
+  }
+
+  .btn-tg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--blue2), var(--blue3));
+    border: none;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(26,79,255,0.4);
+    animation: ctaPulse 2.5s ease-in-out 1.5s infinite;
+    margin-bottom: 14px;
+  }
+  .btn-tg:hover { transform: translateY(-2px); box-shadow: 0 6px 26px rgba(26,79,255,0.55); }
+  .btn-tg:active { transform: translateY(0); }
+  .btn-tg svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  @keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(26,79,255,0.4); }
+    50%       { box-shadow: 0 4px 32px rgba(26,79,255,0.7); }
+  }
+
+  .btn-back {
+    display: block;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-decoration: none;
+    padding: 8px;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--text); }
+
+  @media (max-width: 400px) {
+    .card { padding: 24px 18px; }
+    .card h1 { font-size: 1.4rem; }
+    .success-icon { width: 72px; height: 72px; font-size: 2.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<div class="page">
+  <div class="logo">ИН<span>.</span>ЯЗ</div>
+
+  <div class="success-icon">✓</div>
+
+  <div class="card">
+    <h1>Заявка <em>принята!</em></h1>
+    <p class="subtitle">
+      Светлана уже видит ваше сообщение и скоро выйдет на связь.
+    </p>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot">📩</div>
+        <div class="tl-text">
+          <strong>Светлана напишет вам</strong>
+          <span>Ответит на вопросы, уточнит цель и расписание.</span>
+          <div class="tl-timing">⏱ в течение 2 часов</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">🎯</div>
+        <div class="tl-text">
+          <strong>Бесплатное пробное занятие</strong>
+          <span>Познакомимся с ребёнком, оценим уровень, подберём программу.</span>
+          <div class="tl-timing">⏱ в ближайшие дни</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">📅</div>
+        <div class="tl-text">
+          <strong>Выберем удобное расписание</strong>
+          <span>2–3 раза в неделю, в подходящее для вас время.</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">🚀</div>
+        <div class="tl-text">
+          <strong>Первые результаты</strong>
+          <span>Обычно уже после 4–6 занятий ребёнок начинает говорить увереннее.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="reassure">
+      <strong>Без давления и обязательств.</strong> Пробное занятие — бесплатно.
+      Вы сможете задать любые вопросы и спокойно принять решение.
+      Если что-то не подойдёт — скажите честно, и мы не будем настаивать.
+    </div>
+
+    <div class="cta-wrap">
+      <a class="btn-tg" id="tgBtn" href="https://t.me/SvetlanaReSSina" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.68l-2.95-.924c-.64-.203-.652-.64.136-.953l11.57-4.461c.533-.194 1.001.13.948.879z"/>
+        </svg>
+        Написать Светлане в Telegram
+      </a>
+      <a class="btn-back" href="landing.html">← Вернуться на главную</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 4 + Math.random() * 10;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${8+Math.random()*12}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // Pre-fill Telegram message if came from quiz/calculator
+  const params = new URLSearchParams(location.search);
+  const name    = params.get('name') || '';
+  const contact = params.get('contact') || '';
+  const level   = params.get('level') || '';
+  const exam    = params.get('exam') || '';
+
+  let msg = 'Привет! Я оставил заявку на пробное занятие.';
+  if (name)    msg += ` Меня зовут ${name}.`;
+  if (level)   msg += ` Уровень ребёнка: ${level}.`;
+  if (exam)    msg += ` Готовимся к: ${exam}.`;
+  if (contact) msg += ` Контакт: ${contact}.`;
+
+  document.getElementById('tgBtn').href =
+    `https://t.me/SvetlanaReSSina?text=${encodeURIComponent(msg)}`;
+</script>
+</body>
+</html>

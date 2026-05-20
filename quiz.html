@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Узнай уровень английского ребёнка — ИН.ЯЗ</title>
+  <meta name="description" content="Бесплатный тест: за 3 минуты узнайте реальный уровень английского вашего ребёнка и получите персональный план занятий.">
+  <meta property="og:title" content="Узнай уровень английского ребёнка — ИН.ЯЗ">
+  <meta property="og:description" content="7 вопросов · 3 минуты · бесплатно">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0B2FBF 0%, #1A4FFF 55%, #4B85FF 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Шапка */
+    .brand {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .brand-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+    }
+    .brand h1 {
+      font-size: clamp(20px, 5vw, 26px);
+      font-weight: 800;
+    }
+    .brand p {
+      font-size: 14px;
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    /* Карточка квиза */
+    .quiz-card {
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 36px 32px;
+      max-width: 580px;
+      width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,30,0.25);
+    }
+
+    /* Прогресс-бар */
+    .progress-wrap { margin-bottom: 28px; }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+    .progress-track {
+      height: 6px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #fff;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    /* Вопрос */
+    .question-text {
+      font-size: clamp(16px, 4vw, 20px);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .question-hint {
+      font-size: 13px;
+      opacity: 0.55;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    /* Варианты ответа */
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option {
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 15px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .option:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-1px);
+    }
+    .option.selected {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.65);
+    }
+    .option-letter {
+      width: 28px; height: 28px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* Кнопка «Далее» */
+    .nav { display: flex; justify-content: flex-end; margin-top: 22px; }
+    .btn-next {
+      background: #fff;
+      color: #1A4FFF;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn-next.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* Форма лида */
+    .lead-form { display: none; }
+    .lead-form.show { display: block; }
+    .lead-form h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .lead-form p {
+      font-size: 14px; opacity: 0.75; line-height: 1.6; margin-bottom: 22px;
+    }
+    .fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .fields input {
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .fields input::placeholder { color: rgba(255,255,255,0.45); }
+    .fields input:focus { border-color: rgba(255,255,255,0.55); }
+    .btn-show-result {
+      width: 100%;
+      background: #fff; color: #1A4FFF;
+      border: none; border-radius: 999px;
+      padding: 14px; font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-show-result:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .skip { text-align: center; margin-top: 10px; font-size: 13px; opacity: 0.5; cursor: pointer; text-decoration: underline; }
+    .skip:hover { opacity: 0.75; }
+
+    /* Экран результата */
+    .result { display: none; text-align: center; }
+    .result.show { display: block; }
+    .level-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.45);
+      border-radius: 999px;
+      padding: 8px 28px;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+    .result-title { font-size: clamp(20px, 5vw, 24px); font-weight: 800; margin-bottom: 10px; }
+    .result-desc {
+      font-size: 15px; opacity: 0.82; line-height: 1.65; margin-bottom: 24px;
+    }
+    .result-plan {
+      display: flex; flex-direction: column; gap: 9px;
+      margin-bottom: 26px; text-align: left;
+    }
+    .plan-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 11px 15px;
+      font-size: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .plan-icon {
+      width: 24px; height: 24px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .btn-cta {
+      display: block; width: 100%;
+      background: #fff; color: #1A4FFF;
+      border: none; border-radius: 999px;
+      padding: 16px; font-size: 16px; font-weight: 800;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+      animation: ctaPulse 2s ease-in-out infinite;
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
+      50% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+    }
+    .btn-cta:hover { transform: translateY(-2px); animation: none; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .result-note { font-size: 12px; opacity: 0.45; }
+
+    /* Ссылка на лендинг */
+    .back-link {
+      margin-top: 20px;
+      font-size: 13px;
+      opacity: 0.5;
+      text-align: center;
+    }
+    .back-link a { color: #fff; text-decoration: underline; }
+    .back-link a:hover { opacity: 0.8; }
+
+    @media (max-width: 480px) {
+      .quiz-card { padding: 22px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brand">
+    <div class="brand-badge">🎓 Языковая школа ИН.ЯЗ</div>
+    <h1>Узнай уровень английского ребёнка</h1>
+    <p>7 вопросов · 3 минуты · бесплатно</p>
+  </div>
+
+  <div class="quiz-card">
+
+    <!-- Экран с вопросами -->
+    <div id="quizScreen">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="progressLabel">Вопрос 1 из 7</span>
+          <span id="progressPct">14%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width:14%"></div>
+        </div>
+      </div>
+      <div class="question-text" id="qText"></div>
+      <div class="question-hint" id="qHint"></div>
+      <div class="options" id="optsList"></div>
+      <div class="nav">
+        <button class="btn-next" id="btnNext" onclick="next()">Далее →</button>
+      </div>
+    </div>
+
+    <!-- Форма контактов -->
+    <div class="lead-form" id="leadScreen">
+      <h2>Результат готов! 🎉</h2>
+      <p>Оставьте имя и контакт — Светлана лично разберёт уровень вашего ребёнка и предложит план первых занятий. Это бесплатно и ни к чему не обязывает.</p>
+      <div class="fields">
+        <input type="text" id="fName" placeholder="Ваше имя">
+        <input type="text" id="fContact" placeholder="Телефон или Telegram (@username)">
+      </div>
+      <button class="btn-show-result" onclick="showResult()">Посмотреть результат →</button>
+      <div class="skip" onclick="showResult()">Пропустить и посмотреть результат</div>
+    </div>
+
+    <!-- Результат -->
+    <div class="result" id="resultScreen">
+      <div class="level-badge" id="rLevel"></div>
+      <div class="result-title" id="rTitle"></div>
+      <div class="result-desc" id="rDesc"></div>
+      <div class="result-plan" id="rPlan"></div>
+      <a class="btn-cta" id="rCta" href="#" target="_blank">📩 Записаться на бесплатный урок</a>
+      <div class="result-note">Первый урок — бесплатно. Без обязательств.</div>
+    </div>
+
+  </div>
+
+  <div class="back-link">
+    <a href="landing.html">← Вернуться на главную</a>
+  </div>
+
+  <script>
+    const TG = 'SvetlanaReSSina';
+
+    const questions = [
+      {
+        text: 'Ваш ребёнок может представиться по-английски: имя, возраст, откуда?',
+        hint: 'Например: «My name is Masha. I am 12. I am from Moscow.»',
+        opts: [
+          { text: 'Нет, совсем не может', score: 0 },
+          { text: 'Может несколько слов с трудом', score: 1 },
+          { text: 'Да, легко и уверенно', score: 2 }
+        ]
+      },
+      {
+        text: 'Понимает ли ребёнок простые команды учителя без перевода?',
+        hint: '«Open your book», «Write it down», «Listen and repeat»',
+        opts: [
+          { text: 'Нет, всегда нужен перевод', score: 0 },
+          { text: 'Иногда понимает, иногда нет', score: 1 },
+          { text: 'Да, понимает хорошо', score: 2 }
+        ]
+      },
+      {
+        text: 'Может ли ребёнок прочитать и понять короткий текст (5–6 предложений)?',
+        hint: 'Простой текст из учебника 5–6 класса',
+        opts: [
+          { text: 'Нет, слишком много незнакомых слов', score: 0 },
+          { text: 'Читает, но мало понимает без словаря', score: 1 },
+          { text: 'Читает и понимает смысл', score: 2 }
+        ]
+      },
+      {
+        text: 'Знает ли ребёнок разницу между временами?',
+        hint: 'I play (каждый день) / I am playing (сейчас) / I played (вчера)',
+        opts: [
+          { text: 'Нет, всё путается', score: 0 },
+          { text: 'Знает теорию, но делает ошибки', score: 1 },
+          { text: 'Разбирается хорошо', score: 2 }
+        ]
+      },
+      {
+        text: 'Может ли ребёнок написать небольшое сообщение по-английски?',
+        hint: 'Например, написать другу: что делал в выходные, чем увлекается',
+        opts: [
+          { text: 'Нет, совсем не может', score: 0 },
+          { text: 'Несколько фраз с ошибками', score: 1 },
+          { text: 'Да, пишет связный текст', score: 2 }
+        ]
+      },
+      {
+        text: 'Понимает ли ребёнок простые английские видео или мультфильмы?',
+        hint: 'Cartoon Network, короткие YouTube-ролики для детей',
+        opts: [
+          { text: 'Совсем не понимает', score: 0 },
+          { text: 'Понимает отдельные слова и фразы', score: 1 },
+          { text: 'Понимает основной смысл', score: 2 }
+        ]
+      },
+      {
+        text: 'Может ли ребёнок рассказать о своих увлечениях на английском?',
+        hint: 'Хобби, любимые фильмы, спорт — 5–7 предложений без подготовки',
+        opts: [
+          { text: 'Нет, не хватает слов', score: 0 },
+          { text: 'Несколько фраз с трудом', score: 1 },
+          { text: 'Да, связно и без паники', score: 2 }
+        ]
+      }
+    ];
+
+    const results = {
+      A1: {
+        label: 'A1',
+        title: 'Начинающий уровень',
+        desc: 'Ребёнок знает базовые слова, но пока не строит фразы свободно. Это нормально — и хороший старт. С правильной методикой прогресс виден уже через 6–8 уроков: никакой зубрёжки, только живое общение.',
+        plan: [
+          'Выучить 200 самых нужных слов за 2 месяца',
+          'Говорить простые фразы без страха ошибиться',
+          'Понять, как устроен язык — один раз и навсегда'
+        ],
+        msg: 'Здравствуйте! Прошли тест на уровень. Результат у ребёнка: A1 (Начинающий). Хотим записаться на бесплатный пробный урок.'
+      },
+      A2: {
+        label: 'A2',
+        title: 'Базовый уровень',
+        desc: 'Ребёнок понимает простые фразы и может объяснить основное. Сейчас важно закрепить фундамент и начать говорить — без страха и стресса. За 3–4 месяца занятий реально выйти на уверенный B1.',
+        plan: [
+          'Убрать пробелы в базовой грамматике',
+          'Научиться говорить без подготовки',
+          'Улучшить оценки по английскому в школе'
+        ],
+        msg: 'Здравствуйте! Прошли тест на уровень. Результат у ребёнка: A2 (Базовый). Хотим записаться на бесплатный пробный урок.'
+      },
+      B1: {
+        label: 'B1',
+        title: 'Средний уровень',
+        desc: 'Ребёнок уверенно понимает основные темы и может общаться. Следующий шаг — свободная речь и подготовка к ОГЭ/ЕГЭ. При целенаправленной работе реально получить 80+ баллов на ЕГЭ.',
+        plan: [
+          'Подготовиться к ОГЭ или ЕГЭ по чёткому плану',
+          'Говорить свободно на любую тему',
+          'Достичь уровня B2 за 8–12 месяцев'
+        ],
+        msg: 'Здравствуйте! Прошли тест на уровень. Результат у ребёнка: B1 (Средний). Хотим записаться на бесплатный пробный урок.'
+      }
+    };
+
+    let cur = 0;
+    let total = 0;
+    let chosen = null;
+
+    function getLevel(s) {
+      if (s <= 4) return 'A1';
+      if (s <= 9) return 'A2';
+      return 'B1';
+    }
+
+    function render() {
+      const q = questions[cur];
+      const pct = Math.round(((cur + 1) / questions.length) * 100);
+      document.getElementById('progressLabel').textContent = `Вопрос ${cur + 1} из ${questions.length}`;
+      document.getElementById('progressPct').textContent = `${pct}%`;
+      document.getElementById('progressFill').style.width = `${pct}%`;
+      document.getElementById('qText').textContent = q.text;
+      document.getElementById('qHint').textContent = q.hint;
+
+      const list = document.getElementById('optsList');
+      list.innerHTML = '';
+      const letters = ['А', 'Б', 'В'];
+      q.opts.forEach((o, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.innerHTML = `<span class="option-letter">${letters[i]}</span>${o.text}`;
+        btn.onclick = () => pick(i, o.score);
+        list.appendChild(btn);
+      });
+
+      chosen = null;
+      document.getElementById('btnNext').classList.remove('show');
+    }
+
+    function pick(idx, score) {
+      document.querySelectorAll('.option').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('.option')[idx].classList.add('selected');
+      chosen = score;
+      document.getElementById('btnNext').classList.add('show');
+    }
+
+    function next() {
+      if (chosen === null) return;
+      total += chosen;
+      cur++;
+      if (cur >= questions.length) {
+        document.getElementById('quizScreen').style.display = 'none';
+        document.getElementById('leadScreen').classList.add('show');
+      } else {
+        render();
+      }
+    }
+
+    function showResult() {
+      const name = document.getElementById('fName').value.trim();
+      const contact = document.getElementById('fContact').value.trim();
+      const lvl = getLevel(total);
+      const r = results[lvl];
+
+      let msg = r.msg;
+      if (name) msg += ` Имя: ${name}.`;
+      if (contact) msg += ` Контакт: ${contact}.`;
+
+      document.getElementById('leadScreen').classList.remove('show');
+      document.getElementById('resultScreen').classList.add('show');
+
+      document.getElementById('rLevel').textContent = r.label;
+      document.getElementById('rTitle').textContent = r.title;
+      document.getElementById('rDesc').textContent = r.desc;
+
+      const planEl = document.getElementById('rPlan');
+      planEl.innerHTML = '';
+      r.plan.forEach((item, i) => {
+        const d = document.createElement('div');
+        d.className = 'plan-item';
+        d.innerHTML = `<span class="plan-icon">${i + 1}</span>${item}`;
+        planEl.appendChild(d);
+      });
+
+      document.getElementById('rCta').href =
+        `https://t.me/${TG}?text=${encodeURIComponent(msg)}`;
+    }
+
+    // Запускаем квиз
+    render();
+  </script>
+</body>
+</html>
