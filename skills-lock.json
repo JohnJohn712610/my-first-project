@@ -1,0 +1,833 @@
+{
+  "version": 1,
+  "skills": {
+    "Agent Development": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/agent-development/SKILL.md",
+      "computedHash": "4931c2867890bfef5881225adb691c3d719fe9ad556e3d5fae15f83e0668fa60"
+    },
+    "Command Development": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/command-development/SKILL.md",
+      "computedHash": "bca581f0a2789f75d9501499b9f4dc354eb40b213ccd23d13f5b87299db1f84a"
+    },
+    "Hook Development": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/hook-development/SKILL.md",
+      "computedHash": "a1721df65785b6c0439d4326cdee0cb2b6aa98de09fc98463afc3e040fe00ce9"
+    },
+    "MCP Integration": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/mcp-integration/SKILL.md",
+      "computedHash": "99cfef49810cb80a39762a79dbb6a80d486ea56cfa1a81ed10cae0a5a296b496"
+    },
+    "Plugin Settings": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/plugin-settings/SKILL.md",
+      "computedHash": "b4be0bf62782da83e962aa759e7d5efb1d5934b81554f1d15801fdf5e01b18a4"
+    },
+    "Plugin Structure": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/plugin-structure/SKILL.md",
+      "computedHash": "c4e9b3ea36efad4ab599465aaac71f81dc3320a183920678fe1587181c446b07"
+    },
+    "Skill Development": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/plugin-dev/skills/skill-development/SKILL.md",
+      "computedHash": "8d262f08f33825947ea20204ebf5101e36056c98090251bd973a552ec8ef0c0c"
+    },
+    "Writing Hookify Rules": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/hookify/skills/writing-rules/SKILL.md",
+      "computedHash": "429463a57a711ee42d1373a726e66ccc2189118022f0c281dbb48b28796d417f"
+    },
+    "academic-researcher": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/academic-researcher/SKILL.md",
+      "computedHash": "73a461c6ca9d0d5d9fb66da78915f2500a92ed59874873f03beed4cfb7bdd281"
+    },
+    "agent-context-isolation": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agent-context-isolation/SKILL.md",
+      "computedHash": "fd2071d249a16c649ba19d370b87ee43498870111d59ff59bf003319da4851be"
+    },
+    "agent-orchestration": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agent-orchestration/SKILL.md",
+      "computedHash": "d99889785f6f50dfccebf43619430797c5c24a189e92e76b2927528aa468333e"
+    },
+    "agentic-workflow": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentic-workflow/SKILL.md",
+      "computedHash": "75f2d88fca4eeae8aceea67fcd1e57c840e351d25b97e41bb65b7b514cee7c54"
+    },
+    "agentica-claude-proxy": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentica-claude-proxy/SKILL.md",
+      "computedHash": "5178b8571186219ffde422a3b94b0417a940c2a18df3109ef2c45f979dee2e85"
+    },
+    "agentica-infrastructure": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentica-infrastructure/SKILL.md",
+      "computedHash": "b01d9be642aface73eb357277d36b0d222e17e543408996d4e1e3c54097f73dd"
+    },
+    "agentica-prompts": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentica-prompts/SKILL.md",
+      "computedHash": "e0ac2bed71c8e1d83b4c5a4c7ad36caed52ab2ab911e31d192cd00f030571416"
+    },
+    "agentica-sdk": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentica-sdk/SKILL.md",
+      "computedHash": "34326afd054947f7a7354705288824f7b838a5c0ac6456b64e693196d5c2d5f0"
+    },
+    "agentica-server": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentica-server/SKILL.md",
+      "computedHash": "0ed367904099d53a27559fb6382eb4679b15fcf31e1238d8f24633b8060e7061"
+    },
+    "agentica-spawn": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/agentica-spawn/SKILL.md",
+      "computedHash": "0a666c2dd29864afbd0e8553a3f4a44b9acc345fc432d1cb98f4357ef53bcbee"
+    },
+    "ast-grep-find": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ast-grep-find/SKILL.md",
+      "computedHash": "1c3eb59352c3ca339b89c2c90bf902b630dd1b39e8804ffed3420445ef54699a"
+    },
+    "async-repl-protocol": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/async-repl-protocol/SKILL.md",
+      "computedHash": "9ff9494d01db4737288e12bd4a07bc3922863b36da0642bd8863608cd6a92de7"
+    },
+    "background-agent-pings": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/background-agent-pings/SKILL.md",
+      "computedHash": "e07f497a412a0e436657f58e4091a3472a47b78afc8b4a0e5f6e7d125123d893"
+    },
+    "braintrust-analyze": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/braintrust-analyze/SKILL.md",
+      "computedHash": "8c28bff663a363e91718995c5eeb44356e2c3896aee912f27c1c3ea6210b6e17"
+    },
+    "braintrust-tracing": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/braintrust-tracing/SKILL.md",
+      "computedHash": "278ef51a37fa0e93f1fae3a148f5b69f1e730253444c991a3dcfe7f5009bc482"
+    },
+    "build": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/build/SKILL.md",
+      "computedHash": "a8fc227b7b846329bb42d2fda6ed21fcbb6f8c59aab21d9c9a08e7f6f6e1096d"
+    },
+    "claude-opus-4-5-migration": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/claude-opus-4-5-migration/skills/claude-opus-4-5-migration/SKILL.md",
+      "computedHash": "b03b91554e25480cd5dfdcb8e1c797a4703b9ed5e303593c9ac338d6d43c040a"
+    },
+    "cli-reference": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/cli-reference/SKILL.md",
+      "computedHash": "7eda2b6d93c057f9237cfaceef9a280b7fabb7a24831f097e8276928a2313644"
+    },
+    "code-reviewer": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/code-reviewer/SKILL.md",
+      "computedHash": "20cc3ad7431ddaa86a8560b65afde7ba016d14c37ddafa4eeb441e7fec77be1b"
+    },
+    "commit": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/commit/SKILL.md",
+      "computedHash": "065da3ad7bf2511cfb938c81b1902feb927b23604c237918d0eac505155fb7ab"
+    },
+    "complete-skill": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/complete-skill/SKILL.md",
+      "computedHash": "f0eb6bd5a5b7608a824cb28d6c99a166a0390be2f5010fbaa60a354db68cf522"
+    },
+    "completion-check": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/completion-check/SKILL.md",
+      "computedHash": "9a2de234cffda27aeb243fdaec138b28be580632af69afc359375756bd89eb19"
+    },
+    "compound-learnings": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/compound-learnings/SKILL.md",
+      "computedHash": "b3c8153178600fc8d88a06a2544f90e7d16ed7f4794d02ef75900ef4fbc6be42"
+    },
+    "content-creator": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/content-creator/SKILL.md",
+      "computedHash": "4c8c5eb0a945c3c50d845145fbe3d4347b599eb531cbeb154099276a4bb4a6b6"
+    },
+    "content-writer": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/self-improving-agent-skills/example_skills/content-writer/SKILL.md",
+      "computedHash": "fbb4ae81ec7af17ce38f1d11ca2bc48450c89a7cd02439ea69f02dbe1cb6df4c"
+    },
+    "continuity-ledger": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/continuity_ledger/SKILL.md",
+      "computedHash": "4fa1ad97f347ae32e0732f8e7f33752aab612cf99e382ef614926f9e921c9bac"
+    },
+    "create-handoff": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/create_handoff/SKILL.md",
+      "computedHash": "74ff1ec6880b3ae8dfa6b5b722784cbbb73fa58432ce2e99e5498f4362bac052"
+    },
+    "data-analyst": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/data-analyst/SKILL.md",
+      "computedHash": "b927391093b9e04f091c9c04da47096e2217deb7acaccbfbc9690261626085b6"
+    },
+    "dead-code": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/dead-code/SKILL.md",
+      "computedHash": "41db8514c78bcb6e65479e2612e851abb278f276484d01eefe082ded71106292"
+    },
+    "debug": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/debug/SKILL.md",
+      "computedHash": "da8e560db0e9296c657042a2f7b722c5f029595f9b4a5e39cab004df06a8c597"
+    },
+    "debug-hooks": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/debug-hooks/SKILL.md",
+      "computedHash": "c9a23e721ad6e07a688813193e694d5dfcf55e25cefb9690517cc49511fa2e10"
+    },
+    "debugger": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/debugger/SKILL.md",
+      "computedHash": "23565496cf079e75ef18f4f06d7703dad0d96b2a2be29f5b9da159fc50278b78"
+    },
+    "decision-helper": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/decision-helper/SKILL.md",
+      "computedHash": "41ac0d04df62d35b04d2526f892afbf2a4a4f47c752ca2fb6a7856124552e1b2"
+    },
+    "deep-research": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/deep-research/SKILL.md",
+      "computedHash": "0f11d17f968300db3ca6544edc7398234982f9006c3d02c45c73fca3e4706237"
+    },
+    "describe-pr": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/describe_pr/SKILL.md",
+      "computedHash": "620b7ef436f3a2ce22c7094101ef705429860d795ac8132b8bffe7fd157183ff"
+    },
+    "discovery-interview": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/discovery-interview/SKILL.md",
+      "computedHash": "934f3f1a7dd3a35e3a74f5716242ca2642a0efc6bee4f0c5f8b2233d7aefa9f3"
+    },
+    "editor": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/editor/SKILL.md",
+      "computedHash": "fcb8aa2aacaded8a0f873fde081a7103d5dbbecadbc715faef407019ec9c6c0d"
+    },
+    "email-drafter": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/email-drafter/SKILL.md",
+      "computedHash": "7ccfd1529487a337b71df66927334dbfa3fba9859638956128ecce04aed51652"
+    },
+    "environment-triage": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/environment-triage/SKILL.md",
+      "computedHash": "6bc8b8d7bb26adde97a7c8cc99697d83a75f5f38bb40cf81fc2f11d07ee149dc"
+    },
+    "explicit-identity": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/explicit-identity/SKILL.md",
+      "computedHash": "19031fdc19aeda7cc63c3c0385f364ae1e031825db4efd4122f99e5c4eb3a6e3"
+    },
+    "explore": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/explore/SKILL.md",
+      "computedHash": "5793bece680f934cd0e226ee925d2593d7d3d3d892958d759d9bfc795bed1470"
+    },
+    "fact-checker": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/fact-checker/SKILL.md",
+      "computedHash": "b8b003553b0c268b4c21cfc149e6ff53f8beb1aa1ac8e2642a74104426d8cb3a"
+    },
+    "firecrawl-scrape": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/firecrawl-scrape/SKILL.md",
+      "computedHash": "0ab23f6eee73e2b6203473842fb29f6a7665853b0ecfbf487a20ca8cd7bd5dc9"
+    },
+    "fix": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/fix/SKILL.md",
+      "computedHash": "25ed5d7099252d637c937884de70fcbabff0b7f3c7ca5b3616a47245549b806d"
+    },
+    "frontend-design": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/frontend-design/skills/frontend-design/SKILL.md",
+      "computedHash": "e8118284a6365753790d44bb2758a6032b3af27fa84696428d9233f2be0f4e78"
+    },
+    "fullstack-developer": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/fullstack-developer/SKILL.md",
+      "computedHash": "92f6f4f9bbdde529237f1840d94c4269abb62ad1d5e41d9c76bd14266001cbe8"
+    },
+    "git-commits": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/git-commits/SKILL.md",
+      "computedHash": "269715dccf7767ca7ee94238eb402dfeaa66ce8d54bab79967fee517c38ca4c7"
+    },
+    "github-search": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/github-search/SKILL.md",
+      "computedHash": "f4e1479c2833d78c1e2be3caab843037b365c185468ddfe59a0ba6d2ca9dfd6b"
+    },
+    "graceful-degradation": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/graceful-degradation/SKILL.md",
+      "computedHash": "3acf232866d333da570bc6a497da32637c08977e7a18a873b6b9b27b0a69975a"
+    },
+    "help": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/help/SKILL.md",
+      "computedHash": "bb7f8eb602db9d28de98af9a6a47e7a14b3439584f92e047ec334ac689789d3e"
+    },
+    "hook-developer": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/hook-developer/SKILL.md",
+      "computedHash": "984b11be0e4c40c985f41ddc47b671faf3d863fd10785931ae62b42d23777292"
+    },
+    "hooks": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/hooks/SKILL.md",
+      "computedHash": "b3b17749bbe6dfa40d3553b4f9ab810a6459d833494a78a0822446c6ee71b504"
+    },
+    "idempotent-redundancy": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/idempotent-redundancy/SKILL.md",
+      "computedHash": "7feb255e36b30f77649bb99f087a0d42e539d5ab4bd0d79680ea3a3d6750d195"
+    },
+    "implement_plan": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/implement_plan/SKILL.md",
+      "computedHash": "9a429f04ab02034ac725a22272229922dd857e7256dd88bcbe91ff8ad8cd65da"
+    },
+    "implement_plan_micro": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/implement_plan_micro/SKILL.md",
+      "computedHash": "61c7609d4484e634892c7482501ded412d0a24bad942105c42da0c9d06bc1dfa"
+    },
+    "implement_task": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/implement_task/SKILL.md",
+      "computedHash": "8ffefbebe5286bfe76d47fb64e5321dbc3333553c3ef2dd357e3fe7da2833bbe"
+    },
+    "index-at-creation": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/index-at-creation/SKILL.md",
+      "computedHash": "02e73acde36654299cabf7609716468e10a7671acc2798290a2ae7a44ea380d3"
+    },
+    "llm-tuning-patterns": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/llm-tuning-patterns/SKILL.md",
+      "computedHash": "b602519f722d6b6178d9fe599a887d9048a01af0d114c5ce364950c87357b624"
+    },
+    "loogle-search": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/loogle-search/SKILL.md",
+      "computedHash": "cc5f78870be285cf941f62ba818f1fd46b5d6f13c9294843ee037c8296dca2f8"
+    },
+    "math": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/math-unified/SKILL.md",
+      "computedHash": "98780331887ff182587556774005b21b52a6f79c72ac1e4da60196c945b4a4cf"
+    },
+    "math-help": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/math-help/SKILL.md",
+      "computedHash": "c25ddd83b0c1104649ea3abc5e2189422ff7493cf9dc31add98f06a4db0cebee"
+    },
+    "math-router": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/math-router/SKILL.md",
+      "computedHash": "66dd921ef919389ca10fe636ba3ee7fe8b9e11b91631cb3c50385eb48bb8fc65"
+    },
+    "mcp-chaining": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/mcp-chaining/SKILL.md",
+      "computedHash": "926d946891ea52b9d571749a0b0eaaa4346abbcbcc7a39a7eb7eb3f6121512d3"
+    },
+    "mcp-scripts": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/mcp-scripts/SKILL.md",
+      "computedHash": "e7cb40c3f63bb392b4e1ad8222c53b72100be952c18bc1c0861a72c712a73e42"
+    },
+    "meeting-notes": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/meeting-notes/SKILL.md",
+      "computedHash": "da826e34d85a12d04817dfd88559dde62d44fc161655b5b94388049999492b87"
+    },
+    "migrate": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/migrate/SKILL.md",
+      "computedHash": "a17f07a9e1d98f7c5e13c66a24466786dee66855e1a02e1dcaddf0c897321f5e"
+    },
+    "modular-code": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/modular-code/SKILL.md",
+      "computedHash": "494b7b470eadfa3f4ad4eaa27c7789c682e1162e8ae328bb57e2fd5d7fa41513"
+    },
+    "morph-apply": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/morph-apply/SKILL.md",
+      "computedHash": "df88d0ffaf07aa4f211fab018a9c2aa4463cdb53b2623b4dd86f23d5d2b53627"
+    },
+    "morph-search": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/morph-search/SKILL.md",
+      "computedHash": "a0ee45726b81e2d3734ea31e352b72d1dc08a9f93eda66ffb075824c527e7e0f"
+    },
+    "mot": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/mot/SKILL.md",
+      "computedHash": "cf5d11ac580243b1fb8ae00dfd4ce1b63699a82a6f86e2aeb4b76a7d4d6e3112"
+    },
+    "nia-docs": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/nia-docs/SKILL.md",
+      "computedHash": "926ba01051c6371b536f550b7d8fd02e058e278e42e86b16d66ceb75f0d19b05"
+    },
+    "no-polling-agents": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/no-polling-agents/SKILL.md",
+      "computedHash": "ca5e24c0a4b0176a358c4febfef2938e5c40c8162ddc3f859b676a5ae26e9af4"
+    },
+    "no-task-output": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/no-task-output/SKILL.md",
+      "computedHash": "15262fec3efee873e01f233babe9410b3255813d9414b83a5adc201d4f031868"
+    },
+    "observe-before-editing": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/observe-before-editing/SKILL.md",
+      "computedHash": "a59fd42b3fb6ff25183682b5230341012af0a84254edd4b0a3926fe6ac3dab93"
+    },
+    "onboard": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/onboard/SKILL.md",
+      "computedHash": "55d30ad0302e4cb6bcc92b1e923d61e339fc7a8b8d527efc70559b2a5e37cb03"
+    },
+    "opc-architecture": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/opc-architecture/SKILL.md",
+      "computedHash": "78b2deb0fe1e903a60ee597a9a1e4509897f7de232d5d61eaf167c3e97cda302"
+    },
+    "parallel-agent-contracts": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/parallel-agent-contracts/SKILL.md",
+      "computedHash": "d765f2010bc2b8b32649de1f34bad1da257d8b0e5c1cbd186056aff538a6beeb"
+    },
+    "parallel-agents": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/parallel-agents/SKILL.md",
+      "computedHash": "09810d5a2b7c29022473a4dd9a8a44f3fc0dd4d61cbf3083ce1ae0619c5dd6d0"
+    },
+    "perplexity-search": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/perplexity-search/SKILL.md",
+      "computedHash": "cfcab9828ae372a918ffa76273a33beeb7e4341073b60a00b7e7afbd469db679"
+    },
+    "pint-compute": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/pint-compute/SKILL.md",
+      "computedHash": "fe9d0fef753d99babc445fea2a00f6d997d3df5bdaf6a5d1bb85fde9e7569be0"
+    },
+    "planning-agent": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/plan-agent/SKILL.md",
+      "computedHash": "be5331a0e647b0f81a9c5b90fedfe54b6f30c95a824a2f5f01b3a269180b215d"
+    },
+    "premortem": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/premortem/SKILL.md",
+      "computedHash": "198ad5a1a443e1dd1c94abfa9e14d77bb84d85b1d69c379bfe3fa74de5fef43f"
+    },
+    "project-planner": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/project-planner/SKILL.md",
+      "computedHash": "24c15eb0dd79411a7d78250dbf1dc96ecadbab7b2a23ee5e52bff65ed62b0487"
+    },
+    "prove": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/prove/SKILL.md",
+      "computedHash": "624ee5035fe42738439d3ec4cb70aeaaa848a90a94e6acdf4f1bdb558300c422"
+    },
+    "python-expert": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/python-expert/SKILL.md",
+      "computedHash": "63800ddcf406ccfb4d7dec69b1b7026de6ad465512b95ffdbe955e4e5728483f"
+    },
+    "qlty-check": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/qlty-check/SKILL.md",
+      "computedHash": "f0f7c217f1098116a0965967d2a8294be6a630ace192c49a4a34e050c5542083"
+    },
+    "qlty-during-development": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/qlty-during-development/SKILL.md",
+      "computedHash": "6be8b273baa2ac02b4ffa079f8f1fd41ecdaca2af493295c6616d53e34f7c9de"
+    },
+    "recall": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/recall/SKILL.md",
+      "computedHash": "02c2a0822a574350ba1a57bceadfcf412a3810473887b51dabc2d295b5054e5d"
+    },
+    "recall-reasoning": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/recall-reasoning/SKILL.md",
+      "computedHash": "8de2095d841446d3f5190f9c6613f3ab79201276dbaf1b3f7b58f6b98ebd83b4"
+    },
+    "refactor": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/refactor/SKILL.md",
+      "computedHash": "e6321799351e747819788812676b224011a8fa44762d6c0766b818098af2b183"
+    },
+    "reference-sdk": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/reference-sdk/SKILL.md",
+      "computedHash": "6c9bea15fd5b3facd0433de907c131c12fb6306f1ecac8b678e2c91e82be09c0"
+    },
+    "release": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/release/SKILL.md",
+      "computedHash": "73fbf67ca8825e0f8e3f3aa0dd598e8e4fd3933ac1e95fae0a7bcb04ac1ec553"
+    },
+    "remember": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/remember/SKILL.md",
+      "computedHash": "7e7657617caae8c223b72b4c333a7a4244a0cd1f9b81dcf973521011a83a8da3"
+    },
+    "repo-research-analyst": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/repo-research-analyst/SKILL.md",
+      "computedHash": "8ce90024447cdcb12fc5ca5281056a83fd4293183a6c8e1b4640cc22e11e322d"
+    },
+    "repoprompt": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/repoprompt/SKILL.md",
+      "computedHash": "89f4a37f3ac513000bedcc5568b1cfb27075088b177e3c7d34bb68b550249e30"
+    },
+    "research": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/research/SKILL.md",
+      "computedHash": "7b1dca50aafb05117795581678cc83b2a58a1a5d9e45cb01a87dbc0938a86a14"
+    },
+    "research-agent": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/research-agent/SKILL.md",
+      "computedHash": "6ebe65705ef05db2fb9e6f23504607bd80d7cc711e60854ba7bdd51b3a2c37af"
+    },
+    "research-external": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/research-external/SKILL.md",
+      "computedHash": "f61cbf756d68304df7632da8a23c70d22559ba8086f93f85806fc092cb30c4f7"
+    },
+    "resume-handoff": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/resume_handoff/SKILL.md",
+      "computedHash": "a94d26b546f19beed566e2ca7aa59cab92cc5cdc079d1ec91c56ff928093c4b0"
+    },
+    "review": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/review/SKILL.md",
+      "computedHash": "cd3ecf0ee7e8e7dffbd23cf9874c6b869268dfd1bb4779bd798accc2e6237f16"
+    },
+    "router-first-architecture": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/router-first-architecture/SKILL.md",
+      "computedHash": "c8b3323e9f967e00e9dc16ea6a312f92517b4447b4fddb77fe0fc84069999e79"
+    },
+    "search-hierarchy": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/search-hierarchy/SKILL.md",
+      "computedHash": "184ab197821523f4b0f19113dd758e45ed448fd1acdc703409b5831d141187c8"
+    },
+    "search-router": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/search-router/SKILL.md",
+      "computedHash": "08efeebcb28adb1827d203ddd7e32aa2269d68ec3a8a9539d6b1f2f6396ade57"
+    },
+    "search-tools": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/search-tools/SKILL.md",
+      "computedHash": "65879e338d1f6b0efd16f2caab376dc3896a1d7ca4feffb5c3cee18c7cf536e8"
+    },
+    "security": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/security/SKILL.md",
+      "computedHash": "cc887b92666494cb55238db9fafe4a984adbeb8df30670b8ea215d031ec8a6e8"
+    },
+    "shapely-compute": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/shapely-compute/SKILL.md",
+      "computedHash": "45d64900bd33e594bf48165f7e5f1209732a511bed0cf4242e6c89562a5284d5"
+    },
+    "skill-developer": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/skill-developer/SKILL.md",
+      "computedHash": "c687f6f5dbdb3707b134afc640720b4199bad95a0d46d1388870bf73f73d5dfd"
+    },
+    "skill-development": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/skill-development/SKILL.md",
+      "computedHash": "98172be168fafe7a11a66393f0c7b4d9d4be217fc6876134d1d21a46089c58ee"
+    },
+    "skill-upgrader": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/skill-upgrader/SKILL.md",
+      "computedHash": "06bced714f76fe15c8c828fcfa19fdccab7327f85e9b3c05beafa8b329c8938d"
+    },
+    "slash-commands": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/slash-commands/SKILL.md",
+      "computedHash": "cd1d34b96a8e101ed42c3b0f8f650ddd082fe1e6b782be6f8496395465df673e"
+    },
+    "sprint-planner": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/sprint-planner/SKILL.md",
+      "computedHash": "2878e83b6f3e0e5f686c38a53bfa5abfe022c4b61976fb10c2aedc789e74f5b7"
+    },
+    "strategy-advisor": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/strategy-advisor/SKILL.md",
+      "computedHash": "1710a2178750d1ac124c25fcc9e5ecd64bfb1dda2d94b8371bc19f0572f35844"
+    },
+    "sub-agents": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/sub-agents/SKILL.md",
+      "computedHash": "51e32bc5f1fe70289063fb9f24c2a142afe6ea2dbc9529e0cc6d393c4ff7fab5"
+    },
+    "system-overview": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/system_overview/SKILL.md",
+      "computedHash": "685b229601ec3fe06691908ce158ca790c3c7cbf20ec610e6a7f1b321d95d4ce"
+    },
+    "tdd": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tdd/SKILL.md",
+      "computedHash": "102db25fcab7409234261e780e29d2a6a799650859185cec5f8275dca8607e83"
+    },
+    "tdd-migrate": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tdd-migrate/SKILL.md",
+      "computedHash": "de2739abcfd3f52e2a197ce776fb9565444cb6b9913e31b1f0f9159b53eb7c81"
+    },
+    "tdd-migration-pipeline": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tdd-migration-pipeline/SKILL.md",
+      "computedHash": "083044340b1c865948febcf0dcd6a93ca85d810ce1e03ee94c7d105a2628f9bb"
+    },
+    "technical-writer": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/technical-writer/SKILL.md",
+      "computedHash": "10ad42d28d4a1fabc7407af3fe5f55767b7b4272d6598bedf866ba4a0fe3dca1"
+    },
+    "test": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/test/SKILL.md",
+      "computedHash": "578d7c69b31cacf6eb17957ce5e8f2a0bae8b0ace670755c4688260aa2c70e57"
+    },
+    "tldr-code": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tldr-code/SKILL.md",
+      "computedHash": "e82caa2f57e459deab998e4d30372f34b78222f23d7c8ed0bf087714fffa7a3f"
+    },
+    "tldr-deep": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tldr-deep/SKILL.md",
+      "computedHash": "df0cb556301b7fa0f8fb2022b45fdd7150c1b3fe2cad13c3186837e4094ec99b"
+    },
+    "tldr-overview": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tldr-overview/SKILL.md",
+      "computedHash": "e49bdc648a547da67e5afba42b13b5b91dc5b17ce7317db074e116d75f65d2db"
+    },
+    "tldr-router": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tldr-router/SKILL.md",
+      "computedHash": "9d8025528c09c8833309692306c2050cc6a52daf56bb17eb687a5b400c1fe0d8"
+    },
+    "tldr-stats": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tldr-stats/SKILL.md",
+      "computedHash": "976c439dd5d3e9eacceeb0021dbf5d2ac80a43f253867bf565fc0c26227a4739"
+    },
+    "tour": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tour/SKILL.md",
+      "computedHash": "6325307704cac8013a5f3e695bb283a60de88f5ff8d1fefdace998fd20aa47d2"
+    },
+    "ux-designer": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/ux-designer/SKILL.md",
+      "computedHash": "5059addf2e11d8f1062c524fd7363c9a2bd4deb038924f02436ffb6957c6c938"
+    },
+    "validate-agent": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/validate-agent/SKILL.md",
+      "computedHash": "b14354e99b82522a825e9efdb9a234e7081c09754bffa83de723f207dde1ed87"
+    },
+    "visualization-expert": {
+      "source": "Shubhamsaboo/awesome-llm-apps",
+      "sourceType": "github",
+      "skillPath": "awesome_agent_skills/visualization-expert/SKILL.md",
+      "computedHash": "9b44f1746fe56c2c74011dc3b0a038d20ac2101382c3f3164d0d5047a36da174"
+    },
+    "wiring": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/wiring/SKILL.md",
+      "computedHash": "fb3f615f6183bebc446934ef3762ea9958297cae96bc2589b241342537b26fcb"
+    },
+    "workflow-router": {
+      "source": "parcadei/Continuous-Claude-v3",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/workflow-router/SKILL.md",
+      "computedHash": "dc1745df703c5da54a6ef77e2cb41d1bde658c11f996b2a891d5f1845e1e5e68"
+    }
+  }
+}
