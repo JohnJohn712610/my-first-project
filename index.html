@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Онлайн-уроки английского для детей 7–17 лет. Первый урок бесплатно. Подготовка к ОГЭ и ЕГЭ.">
+  <title>ИН.ЯЗ — Онлайн-репетитор английского для детей</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500&display=swap');
+
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #111111;
+      --card:      #1e1e1e;
+      --border:    #2a2a2a;
+      --text:      #ffffff;
+      --muted:     #a0a0a0;
+      --accent:    #FF6B2B;
+      --accent-h:  #e55a1f;
+      --green:     #4CAF50;
+      --r-card:    20px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.125rem);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLL PROGRESS BAR ─── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), #ff9a62, #FF6B2B);
+      background-size: 200% 100%;
+      z-index: 999;
+      animation: gradient-flow 3s ease infinite;
+      box-shadow: 0 0 12px rgba(255,107,43,.6);
+      transition: width .15s ease-out;
+    }
+    @keyframes gradient-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Nunito', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── UTILITY ─── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section { padding: 90px 0 0; }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 56px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent) 0%, #ff8547 100%);
+      background-size: 200% 200%;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 18px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer;
+      animation: pulse 2.5s infinite;
+      transition: background-position .4s ease, transform .25s cubic-bezier(0.34,1.56,0.64,1), box-shadow .3s ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Shimmer-эффект — пробегающий блик при hover */
+    .btn-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+      transition: left .6s ease;
+    }
+    .btn-cta:hover::before { left: 100%; }
+
+    .btn-cta:hover {
+      background-position: 100% 50%;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(255,107,43,.45), 0 0 0 1px rgba(255,255,255,.1) inset;
+      animation: none;
+    }
+
+    .btn-cta:active {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,43,.5); }
+      50%       { box-shadow: 0 0 0 12px rgba(255,107,43,0); }
+    }
+
+    /* ─── SVG WAVE ─── */
+    .wave {
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      line-height: 0;
+      margin-top: 80px;
+    }
+    .wave svg { width: 100%; height: 60px; }
+
+    /* ─── SCROLL FADE ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(50px) scale(.96);
+      transition: opacity .8s cubic-bezier(0.22,1,0.36,1),
+                  transform .9s cubic-bezier(0.22,1,0.36,1);
+      will-change: opacity, transform;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ═══════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: rgba(17,17,17,.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .navbar.scrolled {
+      border-color: var(--border);
+      box-shadow: 0 4px 30px rgba(0,0,0,.4);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 500;
+      transition: color .2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width .25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--accent-h); }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Плавающие градиентные орбы — создают глубину и параллакс */
+    .hero-orbs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .55;
+      will-change: transform;
+    }
+    .orb-1 {
+      width: 520px; height: 520px;
+      top: -100px; right: -120px;
+      background: radial-gradient(circle, rgba(255,107,43,.7) 0%, transparent 70%);
+      animation: float-orb-1 18s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 380px; height: 380px;
+      bottom: -80px; left: -80px;
+      background: radial-gradient(circle, rgba(255,154,98,.45) 0%, transparent 70%);
+      animation: float-orb-2 22s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 280px; height: 280px;
+      top: 40%; left: 35%;
+      background: radial-gradient(circle, rgba(255,107,43,.3) 0%, transparent 70%);
+      animation: float-orb-3 16s ease-in-out infinite;
+    }
+    @keyframes float-orb-1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(-40px, 60px) scale(1.1); }
+      66%      { transform: translate(30px, -30px) scale(.95); }
+    }
+    @keyframes float-orb-2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(80px, -50px) scale(1.15); }
+    }
+    @keyframes float-orb-3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(50px, 40px) scale(1.05); }
+      66%      { transform: translate(-30px, -60px) scale(.9); }
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 60px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,107,43,.15);
+      color: var(--accent);
+      border: 1px solid rgba(255,107,43,.3);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: .85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .hero h1 span {
+      background: linear-gradient(120deg, #FF6B2B 0%, #ffb380 25%, #FF6B2B 50%, #ff8547 75%, #FF6B2B 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: gradient-text 6s ease infinite;
+      display: inline-block;
+    }
+    @keyframes gradient-text {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-proof {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-proof .stars { color: var(--accent); font-size: 1rem; }
+
+    .hero-img {
+      position: relative;
+    }
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 24px;
+      object-fit: cover;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .9rem;
+      gap: 12px;
+    }
+    .hero-photo-placeholder svg { opacity: .4; }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 24px; left: -20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+    }
+    .hero-badge-icon { font-size: 1.6rem; }
+    .hero-badge-text { font-size: .85rem; }
+    .hero-badge-text strong { color: var(--accent); display: block; font-size: 1.1rem; }
+
+    @media (max-width: 800px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 40px 24px 60px;
+        text-align: center;
+      }
+      .hero-inner > *:nth-child(2) { order: -1; max-width: 340px; margin: 0 auto; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-proof { justify-content: center; }
+      .hero-badge { left: 50%; transform: translateX(-50%); bottom: -20px; width: max-content; }
+    }
+
+    /* ═══════════════════════════════════════
+       PAIN
+    ═══════════════════════════════════════ */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .pain-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      transition: transform .35s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow .35s ease,
+                  border-color .3s ease;
+      position: relative;
+      isolation: isolate;
+    }
+    /* Общий mouse-glow для всех карточек.
+       isolation: isolate на карточке создаёт стек-контекст,
+       z-index: -1 на ::after прячет glow ПОД контентом, но не под фоном страницы. */
+    .pain-card::after,
+    .result-card::after,
+    .step-card::after,
+    .review-card::after,
+    .price-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--r-card);
+      background: radial-gradient(circle 220px at var(--mx,50%) var(--my,50%), rgba(255,107,43,.14), transparent 70%);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .pain-card:hover::after,
+    .result-card:hover::after,
+    .step-card:hover::after,
+    .review-card:hover::after,
+    .price-card:hover::after { opacity: 1; }
+    .pain-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 30px rgba(255,107,43,.15);
+      border-color: rgba(255,107,43,.4);
+    }
+    .pain-emoji { font-size: 2rem; margin-bottom: 14px; }
+    .pain-card p { color: var(--muted); font-style: italic; line-height: 1.6; }
+
+    .pain-bridge {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 1.15rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ═══════════════════════════════════════
+       FOR WHOM
+    ═══════════════════════════════════════ */
+    .whom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .whom-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px 24px;
+      text-align: center;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .whom-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #ff9a62);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .whom-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 30px rgba(255,107,43,.18);
+      border-color: rgba(255,107,43,.4);
+    }
+    .whom-card:hover::before { opacity: 1; }
+    .whom-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .whom-card h3 { font-size: 1.05rem; margin-bottom: 10px; }
+    .whom-card p { font-size: .9rem; color: var(--muted); }
+
+    /* ═══════════════════════════════════════
+       RESULTS
+    ═══════════════════════════════════════ */
+    .results { background: radial-gradient(ellipse 70% 50% at 30% 60%, rgba(255,107,43,.08) 0%, transparent 60%); }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: transform .25s, box-shadow .25s, border-color .3s;
+      position: relative;
+      isolation: isolate;
+    }
+    .result-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 24px rgba(255,107,43,.15);
+      border-color: rgba(255,107,43,.3);
+    }
+    .result-icon { font-size: 2rem; flex-shrink: 0; }
+    .result-card h3 { margin-bottom: 6px; font-size: 1rem; }
+    .result-card p { font-size: .9rem; color: var(--muted); }
+
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 40px 24px;
+    }
+    .counter-item { text-align: center; }
+    .counter-num {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .counter-label { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+
+    @media (max-width: 600px) {
+      .counters { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ═══════════════════════════════════════
+       HOW IT WORKS
+    ═══════════════════════════════════════ */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      position: relative;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 32px 24px;
+      position: relative;
+      isolation: isolate;
+      transition: transform .35s cubic-bezier(0.22,1,0.36,1), box-shadow .35s ease, border-color .3s;
+    }
+    .step-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 30px rgba(255,107,43,.18);
+      border-color: rgba(255,107,43,.35);
+    }
+    .step-card:hover .step-num {
+      color: rgba(255,107,43,.4);
+      transform: scale(1.1);
+    }
+    .step-num {
+      transition: color .3s, transform .3s;
+    }
+    .step-num {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 3rem;
+      color: rgba(255,107,43,.15);
+      position: absolute;
+      top: 16px; right: 20px;
+      line-height: 1;
+    }
+    .step-card h3 { margin-bottom: 10px; font-size: 1.05rem; }
+    .step-card p { color: var(--muted); font-size: .9rem; }
+
+    .tech-note {
+      margin-top: 40px;
+      background: rgba(255,107,43,.07);
+      border: 1px solid rgba(255,107,43,.2);
+      border-radius: var(--r-card);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .tech-note-icon { font-size: 2rem; flex-shrink: 0; }
+    .tech-note p { color: var(--muted); }
+    .tech-note p strong { color: var(--text); }
+
+    /* ═══════════════════════════════════════
+       TEACHER
+    ═══════════════════════════════════════ */
+    .teacher-inner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .teacher-photo-wrap {
+      position: relative;
+    }
+    .teacher-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .85rem;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .teacher-photo svg { opacity: .35; }
+
+    .teacher-name {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .teacher-role {
+      color: var(--accent);
+      font-size: .95rem;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+    .teacher-quote {
+      background: var(--card);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--r-card) var(--r-card) 0;
+      padding: 24px 28px;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .teacher-quote::before {
+      content: '"';
+      font-family: 'Nunito', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      opacity: .5;
+      line-height: .8;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .teacher-badges {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .badge {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .9rem;
+    }
+    .badge-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .badge span { color: var(--muted); }
+    .badge strong { display: block; color: var(--text); font-size: .95rem; }
+
+    @media (max-width: 800px) {
+      .teacher-inner { grid-template-columns: 1fr; }
+      .teacher-photo-wrap { max-width: 280px; margin: 0 auto; }
+      .teacher-text { text-align: center; }
+      .teacher-quote { text-align: left; }
+      .teacher-badges { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+    }
+
+    /* ═══════════════════════════════════════
+       REVIEWS
+    ═══════════════════════════════════════ */
+    .reviews { background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(255,107,43,.07) 0%, transparent 60%); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 32px;
+      position: relative;
+      isolation: isolate;
+      transition: transform .35s cubic-bezier(0.22,1,0.36,1), box-shadow .35s ease, border-color .3s;
+    }
+    .review-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 30px rgba(255,107,43,.15);
+      border-color: rgba(255,107,43,.3);
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .review-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #e55a1f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .review-meta strong { display: block; margin-bottom: 2px; }
+    .review-meta span { font-size: .85rem; color: var(--muted); }
+    .review-result {
+      display: inline-block;
+      background: rgba(76,175,80,.15);
+      color: var(--green);
+      border: 1px solid rgba(76,175,80,.3);
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: .8rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .review-stars { color: var(--accent); margin-bottom: 12px; font-size: .9rem; }
+    .review-text { color: var(--muted); font-size: .9rem; line-height: 1.7; }
+
+    /* ═══════════════════════════════════════
+       PRICES
+    ═══════════════════════════════════════ */
+    .prices-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      isolation: isolate;
+      transition: transform .4s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow .4s ease,
+                  border-color .3s ease;
+    }
+    .price-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 28px 70px rgba(0,0,0,.55), 0 0 40px rgba(255,107,43,.2);
+      border-color: rgba(255,107,43,.5);
+    }
+    .price-card.popular {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .popular-badge {
+      position: absolute;
+      top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 20px;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      white-space: nowrap;
+    }
+    .price-icon { font-size: 2rem; margin-bottom: 16px; }
+    .price-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .price-format { color: var(--muted); font-size: .85rem; margin-bottom: 24px; }
+    .price-amount {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .price-per { color: var(--muted); font-size: .85rem; }
+
+    .prices-note {
+      text-align: center;
+      margin-top: 48px;
+      color: var(--muted);
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .prices-note strong { color: var(--text); }
+
+    .prices-cta { text-align: center; margin-top: 32px; }
+
+    @media (max-width: 720px) {
+      .prices-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+    }
+
+    /* ═══════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════ */
+    .faq-list { max-width: 780px; margin: 0 auto; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-align: left;
+      padding: 24px 48px 24px 0;
+      cursor: pointer;
+      position: relative;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-arrow {
+      position: absolute;
+      right: 0;
+      width: 28px; height: 28px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .25s, border-color .25s, transform .35s;
+      flex-shrink: 0;
+    }
+    .faq-arrow svg {
+      width: 14px; height: 14px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 2;
+      transition: stroke .2s, transform .35s;
+    }
+    .faq-item.open .faq-arrow {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: rotate(180deg);
+    }
+    .faq-item.open .faq-arrow svg { stroke: #fff; }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .45s cubic-bezier(0.4,0,0.2,1), padding .3s;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer-inner {
+      padding-bottom: 24px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      margin-top: 80px;
+      background: linear-gradient(135deg, #1e1e1e 0%, rgba(255,107,43,.1) 100%);
+      border: 1px solid rgba(255,107,43,.25);
+      border-radius: 28px;
+      padding: 64px 40px;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 16px;
+    }
+    .final-cta p { color: var(--muted); margin-bottom: 36px; }
+    .final-note {
+      margin-top: 18px;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background: #0a0a0a;
+      border-top: 1px solid var(--border);
+      padding: 48px 0 32px;
+      margin-top: 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .footer-desc { color: var(--muted); font-size: .9rem; margin-top: 8px; }
+    .footer-contacts { text-align: right; }
+    .footer-contacts a {
+      color: var(--accent);
+      font-weight: 600;
+      transition: color .2s;
+    }
+    .footer-contacts a:hover { color: var(--accent-h); }
+    .footer-contacts p { color: var(--muted); font-size: .85rem; margin-top: 8px; }
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-bottom a { color: var(--muted); transition: color .2s; }
+    .footer-bottom a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .footer-contacts { text-align: left; }
+    }
+
+    /* ═══════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal {
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 480px;
+      transform: scale(.92) translateY(20px);
+      transition: transform .35s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative;
+    }
+    .modal-overlay.open .modal {
+      transform: scale(1) translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color .2s, border-color .2s;
+    }
+    .modal-close:hover { color: var(--text); border-color: var(--text); }
+    .modal h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .modal .modal-sub { color: var(--muted); font-size: .9rem; margin-bottom: 32px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .form-group input::placeholder { color: var(--muted); }
+    .form-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,107,43,.15);
+    }
+    .form-submit {
+      width: 100%;
+      margin-top: 8px;
+      animation: none !important;
+    }
+    .form-privacy { text-align: center; font-size: .8rem; color: var(--muted); margin-top: 14px; }
+
+    /* Success state */
+    .modal-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .modal-success .success-icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .modal-success h3 { margin-bottom: 12px; }
+    .modal-success p { color: var(--muted); }
+
+    /* ═══════════════════════════════════════
+       STICKY MOBILE BUTTON
+    ═══════════════════════════════════════ */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 800;
+      padding: 12px 20px 20px;
+      background: linear-gradient(to top, #111 60%, transparent);
+    }
+    .sticky-cta .btn-cta {
+      width: 100%;
+      text-align: center;
+      padding: 16px;
+      font-size: 1rem;
+    }
+    @media (max-width: 700px) {
+      .sticky-cta { display: block; }
+      body { padding-bottom: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════
+     NAVBAR
+════════════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="#hero">ИН.ЯЗ</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#for-whom">Для кого</a></li>
+        <li><a href="#how">Программы</a></li>
+        <li><a href="#teacher">Преподаватель</a></li>
+        <li><a href="#prices">Цены</a></li>
+      </ul>
+    </nav>
+    <button class="nav-cta" onclick="openModal()">Записаться</button>
+  </div>
+</header>
+
+
+<!-- ════════════════════════
+     HERO
+════════════════════════ -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<main>
+<section class="hero" id="hero">
+  <div class="hero-orbs">
+    <div class="orb orb-1" data-parallax="0.3"></div>
+    <div class="orb orb-2" data-parallax="0.5"></div>
+    <div class="orb orb-3" data-parallax="0.2"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">🎓 Онлайн-репетитор · Дети 7–17 лет</div>
+      <h1>Ваш ребёнок <span>заговорит по-английски</span> уже через 3 месяца</h1>
+      <p class="hero-sub">Онлайн-уроки для детей 7–17 лет — индивидуально или в мини-группе. Готовим к ОГЭ и ЕГЭ. Первый урок — бесплатно.</p>
+      <button class="btn-cta" onclick="openModal()">Записаться на бесплатный урок</button>
+      <div class="hero-proof">
+        <span class="stars">★★★★★</span>
+        Уже занимаются 80+ детей · Средний балл ОГЭ учеников — 4,7
+      </div>
+    </div>
+
+    <div class="hero-img">
+      <div class="hero-photo-placeholder">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="32" r="18" stroke="#a0a0a0" stroke-width="2"/>
+          <path d="M10 72c0-16.6 13.4-30 30-30s30 13.4 30 30" stroke="#a0a0a0" stroke-width="2"/>
+        </svg>
+        Фото Светланы
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-icon">🏆</div>
+        <div class="hero-badge-text">
+          <strong>4 года</strong>
+          опыта работы
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#1e1e1e" opacity="0.5"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     PAIN
+════════════════════════ -->
+<section class="section" id="pain">
+  <div class="container">
+    <h2 class="section-title fade-up">Знакомо хотя бы одно из этого?</h2>
+
+    <div class="pain-grid">
+      <div class="pain-card fade-up">
+        <div class="pain-emoji">😤</div>
+        <p>«Репетиторы берут деньги — а результата нет. Ребёнок как не мог говорить, так и не может»</p>
+      </div>
+      <div class="pain-card fade-up">
+        <div class="pain-emoji">😩</div>
+        <p>«Ребёнок не хочет учиться. Каждый раз — скандал перед уроком»</p>
+      </div>
+      <div class="pain-card fade-up">
+        <div class="pain-emoji">😰</div>
+        <p>«ОГЭ / ЕГЭ на носу, а уровень — ноль. Не знаем, с чего начать»</p>
+      </div>
+      <div class="pain-card fade-up">
+        <div class="pain-emoji">🕐</div>
+        <p>«Нет времени возить на занятия. Онлайн пробовали — скучно и неэффективно»</p>
+      </div>
+    </div>
+
+    <p class="pain-bridge fade-up">Мы сделали так, чтобы это больше не было вашей проблемой.</p>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="#111" opacity="0.6"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     FOR WHOM
+════════════════════════ -->
+<section class="section" id="for-whom">
+  <div class="container">
+    <h2 class="section-title fade-up">Кому подойдут занятия</h2>
+    <p class="section-sub fade-up">Найдите себя — и узнайте, как именно мы поможем вашему ребёнку</p>
+
+    <div class="whom-grid">
+      <div class="whom-card fade-up">
+        <div class="whom-icon">🧩</div>
+        <h3>Дети 7–9 лет</h3>
+        <p>Первое знакомство с английским. Учимся через игры и истории — никакой зубрёжки, только интерес</p>
+      </div>
+      <div class="whom-card fade-up">
+        <div class="whom-icon">🎒</div>
+        <h3>Дети 10–12 лет</h3>
+        <p>Начинаем с нуля или закрепляем школьную программу. Учимся без зубрёжки</p>
+      </div>
+      <div class="whom-card fade-up">
+        <div class="whom-icon">🎧</div>
+        <h3>Подростки 13–15 лет</h3>
+        <p>Подтягиваем уровень, устраняем пробелы, учимся говорить — а не только писать тесты</p>
+      </div>
+      <div class="whom-card fade-up">
+        <div class="whom-icon">🎓</div>
+        <h3>Старшеклассники 15–17 лет</h3>
+        <p>Подготовка к ОГЭ и ЕГЭ по чёткой программе. Разбираем формат, тренируемся на реальных заданиях</p>
+      </div>
+      <div class="whom-card fade-up">
+        <div class="whom-icon">👥</div>
+        <h3>Мини-группы</h3>
+        <p>2–4 ученика — живое общение, разговорная практика и цена ниже индивидуального</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="#1e1e1e" opacity="0.3"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     RESULTS
+════════════════════════ -->
+<section class="section results" id="results">
+  <div class="container">
+    <h2 class="section-title fade-up">Что получит ваш ребёнок</h2>
+    <p class="section-sub fade-up">Не «уникальная методика», а конкретные изменения — которые видны.</p>
+
+    <div class="results-grid">
+      <div class="result-card fade-up">
+        <div class="result-icon">🗣️</div>
+        <div>
+          <h3>Заговорит без страха</h3>
+          <p>Перестанет бояться ошибок и начнёт говорить в живых ситуациях</p>
+        </div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-icon">📈</div>
+        <div>
+          <h3>Подтянет оценки</h3>
+          <p>Оценка в школе вырастет за семестр</p>
+        </div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-icon">🎯</div>
+        <div>
+          <h3>Сдаст ОГЭ / ЕГЭ</h3>
+          <p>Разберём формат, потренируемся на реальных вариантах</p>
+        </div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-icon">🎵</div>
+        <div>
+          <h3>Поймёт песни и сериалы</h3>
+          <p>Начнёт понимать English-контент без субтитров</p>
+        </div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-icon">💬</div>
+        <div>
+          <h3>Научится строить предложения</h3>
+          <p>Без подсказок и гугл-переводчика</p>
+        </div>
+      </div>
+      <div class="result-card fade-up">
+        <div class="result-icon">😊</div>
+        <div>
+          <h3>Полюбит английский</h3>
+          <p>Уроки будут в удовольствие, а не обязанность</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="counters fade-up">
+      <div class="counter-item">
+        <span class="counter-num" data-target="80" data-suffix="+">0</span>
+        <div class="counter-label">учеников</div>
+      </div>
+      <div class="counter-item">
+        <span class="counter-num" data-target="4" data-suffix=" года">0</span>
+        <div class="counter-label">опыта работы</div>
+      </div>
+      <div class="counter-item">
+        <span class="counter-num" data-target="47" data-suffix=" / 5" data-format="decimal">0</span>
+        <div class="counter-label">средний балл ОГЭ</div>
+      </div>
+      <div class="counter-item">
+        <span class="counter-num" data-target="95" data-suffix="%">0</span>
+        <div class="counter-label">доходят до цели</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C720,60 720,0 1440,30 L1440,60 L0,60 Z" fill="#111" opacity="0.5"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     HOW IT WORKS
+════════════════════════ -->
+<section class="section" id="how">
+  <div class="container">
+    <h2 class="section-title fade-up">Как это работает</h2>
+    <p class="section-sub fade-up">Четыре простых шага — и ребёнок уже занимается</p>
+
+    <div class="steps">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h3>Записываетесь</h3>
+        <p>Оставляете имя и номер. Я свяжусь в течение 2 часов и уточню уровень ребёнка</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">2</div>
+        <h3>Бесплатный урок</h3>
+        <p>45 минут онлайн вживую. Смотрите сами, нравится ли формат — без давления и обязательств</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">3</div>
+        <h3>Индивидуальный план</h3>
+        <p>После урока составляю программу под конкретного ребёнка и его цели</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">4</div>
+        <h3>Занимаемся и растём</h3>
+        <p>Раз в месяц отчитываюсь родителям о прогрессе. Всё прозрачно</p>
+      </div>
+    </div>
+
+    <div class="tech-note fade-up">
+      <div class="tech-note-icon">💻</div>
+      <p><strong>Технически — всё просто.</strong> Занятия в Zoom или Google Meet. Нужен только браузер и наушники. Ничего скачивать и устанавливать не нужно.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,50 C480,10 960,60 1440,10 L1440,60 L0,60 Z" fill="#1a1a1a" opacity="0.4"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     TEACHER
+════════════════════════ -->
+<section class="section" id="teacher">
+  <div class="container">
+    <h2 class="section-title fade-up">Кто преподаёт</h2>
+
+    <div class="teacher-inner" style="margin-top: 56px;">
+      <div class="teacher-photo-wrap fade-up">
+        <div class="teacher-photo">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="32" r="18" stroke="#a0a0a0" stroke-width="2"/>
+            <path d="M10 72c0-16.6 13.4-30 30-30s30 13.4 30 30" stroke="#a0a0a0" stroke-width="2"/>
+          </svg>
+          <span style="color: var(--muted); font-size: .85rem;">Фото Светланы</span>
+        </div>
+      </div>
+
+      <div class="teacher-text fade-up">
+        <div class="teacher-name">Светлана Рессина</div>
+        <div class="teacher-role">Преподаватель английского · Специализация: дети и подростки, ОГЭ/ЕГЭ</div>
+
+        <div class="teacher-quote">
+          Я работаю с детьми уже несколько лет. Знаю, как объяснить Present Perfect без слёз и как сделать так, чтобы ребёнок сам захотел заниматься — а не из-под палки. Мои ученики сдают ОГЭ в среднем на 4,7.
+        </div>
+
+        <div class="teacher-badges">
+          <div class="badge">
+            <div class="badge-icon">📜</div>
+            <div>
+              <strong>Диплом педагога</strong>
+              <span>Высшее образование</span>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon">🏆</div>
+            <div>
+              <strong>80+ учеников</strong>
+              <span>сдали ОГЭ/ЕГЭ</span>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon">⭐</div>
+            <div>
+              <strong>Рейтинг 5.0</strong>
+              <span>от родителей</span>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon">🌍</div>
+            <div>
+              <strong>Ученики из России</strong>
+              <span>занимаются онлайн</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,10 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#111" opacity="0.4"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     REVIEWS
+════════════════════════ -->
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <h2 class="section-title fade-up">Что говорят родители</h2>
+    <p class="section-sub fade-up">Реальные истории — с именами, городами и конкретными результатами</p>
+
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-header">
+          <div class="review-avatar">АМ</div>
+          <div class="review-meta">
+            <strong>Анна Михайлова</strong>
+            <span>Москва · дочь 12 лет</span>
+          </div>
+        </div>
+        <div class="review-result">✅ С A1 до A2 за 4 месяца</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Дочь боялась говорить на английском вслух — краснела, замолкала. После занятий со Светланой за 4 месяца дошли с A1 до A2. Теперь сама смотрит сериалы без субтитров. Урок живой, не скучный — ребёнок сам напоминает, что «сегодня занятие».</p>
+      </div>
+
+      <div class="review-card fade-up">
+        <div class="review-header">
+          <div class="review-avatar" style="background: linear-gradient(135deg, #4CAF50, #2d8632);">ДК</div>
+          <div class="review-meta">
+            <strong>Дмитрий Козлов</strong>
+            <span>Санкт-Петербург · сын 16 лет</span>
+          </div>
+        </div>
+        <div class="review-result">✅ ОГЭ сдал на 4</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Сын готовился к ОГЭ — паника была у всей семьи. Светлана разложила весь формат по полочкам, разобрали реальные варианты. Итог — сдал на 4, хотя месяц назад не мог пройти даже тест A2. Рекомендую всем, кто готовится к экзаменам.</p>
+      </div>
+
+      <div class="review-card fade-up">
+        <div class="review-header">
+          <div class="review-avatar" style="background: linear-gradient(135deg, #9c27b0, #673ab7);">ЕС</div>
+          <div class="review-meta">
+            <strong>Елена Смирнова</strong>
+            <span>Казань · сын 8 лет</span>
+          </div>
+        </div>
+        <div class="review-result">✅ Полюбил английский</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Сыну 8 лет — боялась, что будет скучать. Ничего подобного! Каждый урок — как игра. Уже знает цвета, животных, счёт до 100, поёт песенки на английском. Просит ещё дополнительный урок в неделю. Светлана нашла ключик к ребёнку.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 C720,0 720,60 1440,20 L1440,60 L0,60 Z" fill="#1e1e1e" opacity="0.35"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     PRICES
+════════════════════════ -->
+<section class="section" id="prices">
+  <div class="container">
+    <h2 class="section-title fade-up">Стоимость занятий</h2>
+    <p class="section-sub fade-up">Открытые цены — никакого «стоимость по запросу»</p>
+
+    <div class="prices-grid">
+      <div class="price-card fade-up">
+        <div class="price-icon">👤</div>
+        <div class="price-name">Индивидуально</div>
+        <div class="price-format">1 ученик · 45 минут</div>
+        <div class="price-amount">от 1 200 ₽</div>
+        <div class="price-per">за урок</div>
+      </div>
+
+      <div class="price-card popular fade-up">
+        <div class="popular-badge">★ Популярный</div>
+        <div class="price-icon">👥</div>
+        <div class="price-name">Мини-группа</div>
+        <div class="price-format">2–4 ученика · 60 минут</div>
+        <div class="price-amount">от 700 ₽</div>
+        <div class="price-per">за урок</div>
+      </div>
+
+      <div class="price-card fade-up">
+        <div class="price-icon">🎯</div>
+        <div class="price-name">Подготовка к ОГЭ/ЕГЭ</div>
+        <div class="price-format">Индивидуально · по плану</div>
+        <div class="price-amount">от 1 500 ₽</div>
+        <div class="price-per">за урок</div>
+      </div>
+    </div>
+
+    <p class="prices-note fade-up">
+      <strong>Не знаете с какого тарифа начать?</strong> Приходите на бесплатный урок — разберёмся вместе и подберём формат под ребёнка и бюджет.
+    </p>
+    <div class="prices-cta fade-up">
+      <button class="btn-cta" onclick="openModal()">Записаться на бесплатный урок</button>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#111" opacity="0.45"/>
+  </svg>
+</div>
+
+
+<!-- ════════════════════════
+     FAQ + FINAL CTA
+════════════════════════ -->
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-title fade-up">Частые вопросы</h2>
+
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Как проходит бесплатный урок?
+          <span class="faq-arrow">
+            <svg viewBox="0 0 14 14"><polyline points="2,5 7,10 12,5"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">45 минут онлайн, смотрим уровень ребёнка, знакомимся. Без обязательств — понравится, продолжим; нет — всё хорошо.</div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Какая платформа? Нужно что-то скачивать?
+          <span class="faq-arrow">
+            <svg viewBox="0 0 14 14"><polyline points="2,5 7,10 12,5"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Занятия в Zoom или Google Meet. Нужен только браузер и наушники. Ничего устанавливать не нужно.</div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Можно ли перенести урок?
+          <span class="faq-arrow">
+            <svg viewBox="0 0 14 14"><polyline points="2,5 7,10 12,5"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Да, за 24 часа до начала — без вопросов.</div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Как оплачивать?
+          <span class="faq-arrow">
+            <svg viewBox="0 0 14 14"><polyline points="2,5 7,10 12,5"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Помесячно или пакетом уроков. Реквизиты — по договорённости после записи.</div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Что если преподаватель не понравится ребёнку?
+          <span class="faq-arrow">
+            <svg viewBox="0 0 14 14"><polyline points="2,5 7,10 12,5"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Честно поговорим и разберёмся. Возврат оплаты за непроведённые уроки — гарантирован.</div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          С какого возраста берёте?
+          <span class="faq-arrow">
+            <svg viewBox="0 0 14 14"><polyline points="2,5 7,10 12,5"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Работаю с детьми от 7 лет.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="final-cta fade-up">
+      <h2>Первый шаг — бесплатно и без обязательств</h2>
+      <p>Оставьте имя и телефон — напишу в Telegram в течение 2 часов.</p>
+      <button class="btn-cta" onclick="openModal()">Записаться на бесплатный урок</button>
+      <div class="final-note">Без давления и звонков в неудобное время</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════
+     FOOTER
+════════════════════════ -->
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">ИН.ЯЗ</div>
+        <div class="footer-desc">Онлайн-репетитор английского для детей 7–17 лет</div>
+      </div>
+      <div class="footer-contacts">
+        <div><a href="https://t.me/SvetlanaReSSina" target="_blank" rel="noopener">Telegram: @SvetlanaReSSina</a></div>
+        <p>Отвечаю в течение 2 часов</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ИН.ЯЗ — Светлана Рессина</span>
+      <span><a href="#">Политика конфиденциальности</a></span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════
+     STICKY MOBILE CTA
+════════════════════════ -->
+<div class="sticky-cta">
+  <button class="btn-cta" onclick="openModal()">Записаться на бесплатный урок</button>
+</div>
+
+
+<!-- ════════════════════════
+     MODAL
+════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Закрыть">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16">
+        <line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/>
+      </svg>
+    </button>
+
+    <div id="modalForm">
+      <h3>Записаться на<br><span style="color:var(--accent)">бесплатный урок</span></h3>
+      <p class="modal-sub">Заполните 2 поля — и я напишу вам в Telegram в течение 2 часов.</p>
+
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <input type="text" placeholder="Ваше имя" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Телефон или Telegram" required autocomplete="tel">
+        </div>
+        <button type="submit" class="btn-cta form-submit">Записаться на бесплатный урок →</button>
+        <p class="form-privacy">Отвечаю в течение 2 часов. Данные не передаю третьим лицам.</p>
+      </form>
+    </div>
+
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">🎉</div>
+      <h3>Заявка принята!</h3>
+      <p>Светлана напишет вам в Telegram в течение 2 часов. Готовьтесь к первому уроку — он бесплатный.</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /* ── Navbar scroll + parallax + progress bar ── */
+  const navbar = document.getElementById('navbar');
+  const progressBar = document.getElementById('scrollProgress');
+  const orbs = document.querySelectorAll('.orb');
+  let ticking = false;
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    // Прогресс-бар
+    if (progressBar) {
+      progressBar.style.width = (scrollY / docHeight * 100) + '%';
+    }
+
+    // Прозрачность шапки
+    navbar.classList.toggle('scrolled', scrollY > 40);
+
+    // Параллакс на орбах — каждый со своей скоростью
+    orbs.forEach(orb => {
+      const speed = parseFloat(orb.dataset.parallax) || 0.3;
+      orb.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* ── Mousemove glow на карточках ── */
+  document.querySelectorAll('.pain-card, .whom-card, .result-card, .step-card, .review-card, .price-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', x + '%');
+      card.style.setProperty('--my', y + '%');
+    });
+  });
+
+  /* ── Smooth scroll для nav-ссылок (с offset под шапку) ── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId === '#' || targetId.length < 2) return;
+      const target = document.querySelector(targetId);
+      if (!target) return;
+      e.preventDefault();
+      const offset = 70;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  /* ── Scroll fade-in ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const delay = (e.target.dataset.delay || 0);
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.dataset.delay = (i % 4) * 80;
+    observer.observe(el);
+  });
+
+  /* ── Counters ── */
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        counterObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const countersEl = document.querySelector('.counters');
+  if (countersEl) counterObserver.observe(countersEl);
+
+  function animateCounters() {
+    document.querySelectorAll('.counter-num').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const format = el.dataset.format || '';
+      const duration = 1800;
+      const step = 16;
+      const steps = duration / step;
+      let current = 0;
+
+      const fmt = (v) => format === 'decimal'
+        ? (v / 10).toFixed(1).replace('.', ',') + suffix
+        : v + suffix;
+
+      const timer = setInterval(() => {
+        current++;
+        const value = Math.round((target / steps) * current);
+        el.textContent = fmt(value);
+        if (current >= steps) {
+          el.textContent = fmt(target);
+          clearInterval(timer);
+        }
+      }, step);
+    });
+  }
+
+  /* ── FAQ accordion ── */
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── Modal ── */
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('modalSuccess').style.display = 'block';
+    setTimeout(() => {
+      closeModal();
+      setTimeout(() => {
+        document.getElementById('modalForm').style.display = '';
+        document.getElementById('modalSuccess').style.display = 'none';
+      }, 400);
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>
