@@ -226,8 +226,68 @@
     }
     .nav-cta:hover { background: var(--accent-h); }
 
+    /* ─── HAMBURGER ─── */
+    .nav-burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 44px;
+      height: 44px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .3s ease, opacity .2s ease;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ─── MOBILE DRAWER ─── */
+    .mobile-menu {
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(17,17,17,.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-110%);
+      transition: transform .35s cubic-bezier(0.22,1,0.36,1);
+      z-index: 890;
+      padding: 24px 24px 32px;
+    }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 16px 12px;
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s, padding-left .25s;
+    }
+    .mobile-menu a:hover, .mobile-menu a:active { color: var(--accent); padding-left: 18px; }
+
     @media (max-width: 700px) {
       .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-cta { display: none; }
     }
 
     /* ═══════════════════════════════════════
@@ -1060,6 +1120,159 @@
     .modal-success p { color: var(--muted); }
 
     /* ═══════════════════════════════════════
+       FEEDBACK FORM
+    ═══════════════════════════════════════ */
+    .feedback {
+      max-width: 640px;
+      margin: 64px auto 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .feedback h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .feedback .feedback-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .feedback .form-group { margin-bottom: 16px; }
+    .feedback textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      background: #161616;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .feedback input { background: #161616 !important; }
+    .feedback textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,107,43,.15);
+    }
+    .feedback textarea::placeholder { color: var(--muted); }
+    .feedback .form-submit { margin-top: 8px; }
+
+    .feedback-success {
+      display: none;
+      text-align: center;
+      padding: 32px 0;
+      animation: success-pop .55s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes success-pop {
+      0%   { transform: scale(.6); opacity: 0; }
+      60%  { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .feedback-check {
+      width: 88px; height: 88px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4CAF50 0%, #2d8632 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 0 rgba(76,175,80,.6);
+      animation: pulse-green 1.8s ease-out infinite;
+    }
+    @keyframes pulse-green {
+      0%   { box-shadow: 0 0 0 0 rgba(76,175,80,.55); }
+      80%  { box-shadow: 0 0 0 22px rgba(76,175,80,0); }
+      100% { box-shadow: 0 0 0 0 rgba(76,175,80,0); }
+    }
+    .feedback-check svg {
+      width: 44px; height: 44px;
+      stroke: #fff;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: draw-check .6s .15s ease-out forwards;
+    }
+    @keyframes draw-check {
+      to { stroke-dashoffset: 0; }
+    }
+    .feedback-success h3 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .feedback-success p { color: var(--muted); }
+
+    .confetti {
+      position: absolute;
+      width: 10px; height: 14px;
+      top: 50%; left: 50%;
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 2px;
+    }
+    .feedback-success.go .confetti {
+      animation: confetti-fly 1.4s ease-out forwards;
+    }
+    @keyframes confetti-fly {
+      0%   { opacity: 1; transform: translate(0,0) rotate(0deg); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)); }
+    }
+
+    @media (max-width: 600px) {
+      .feedback { padding: 36px 22px; border-radius: 22px; }
+    }
+
+    /* ═══════════════════════════════════════
+       SCROLL TOP BUTTON
+    ═══════════════════════════════════════ */
+    .scroll-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(255,107,43,.4);
+      opacity: 0;
+      transform: translateY(20px) scale(.8);
+      pointer-events: none;
+      transition: opacity .3s ease, transform .3s cubic-bezier(0.34,1.56,0.64,1), background .2s;
+      z-index: 850;
+    }
+    .scroll-top.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .scroll-top:hover { background: var(--accent-h); }
+    .scroll-top svg { width: 22px; height: 22px; }
+    @media (max-width: 700px) {
+      .scroll-top {
+        right: 16px;
+        bottom: 88px;
+        width: 46px;
+        height: 46px;
+      }
+    }
+
+    /* ═══════════════════════════════════════
        STICKY MOBILE BUTTON
     ═══════════════════════════════════════ */
     .sticky-cta {
@@ -1099,6 +1312,19 @@
       </ul>
     </nav>
     <button class="nav-cta" onclick="openModal()">Записаться</button>
+    <button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#for-whom" onclick="closeMobileMenu()">Для кого</a></li>
+      <li><a href="#how" onclick="closeMobileMenu()">Программы</a></li>
+      <li><a href="#teacher" onclick="closeMobileMenu()">Преподаватель</a></li>
+      <li><a href="#prices" onclick="closeMobileMenu()">Цены</a></li>
+      <li><a href="#feedback" onclick="closeMobileMenu()">Написать</a></li>
+      <li><a href="#" onclick="event.preventDefault(); closeMobileMenu(); openModal();">Записаться</a></li>
+    </ul>
   </div>
 </header>
 
@@ -1630,6 +1856,40 @@
 
 
 <!-- ════════════════════════
+     FEEDBACK FORM
+════════════════════════ -->
+<section class="section" id="feedback">
+  <div class="container">
+    <div class="feedback fade-up">
+      <h2>Остались вопросы?</h2>
+      <p class="feedback-sub">Напишите — и я отвечу лично, без шаблонов</p>
+
+      <form id="feedbackForm" onsubmit="handleFeedback(event)">
+        <div class="form-group">
+          <input type="text" id="fbName" placeholder="Ваше имя" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <input type="email" id="fbEmail" placeholder="Email" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <textarea id="fbMessage" placeholder="Ваш вопрос или сообщение" required></textarea>
+        </div>
+        <button type="submit" class="btn-cta form-submit">Отправить сообщение</button>
+        <p class="form-privacy">Отвечаю в течение дня. Данные не передаю третьим лицам.</p>
+      </form>
+
+      <div class="feedback-success" id="feedbackSuccess">
+        <div class="feedback-check">
+          <svg viewBox="0 0 24 24"><polyline points="5,12 10,17 19,7"/></svg>
+        </div>
+        <h3>Сообщение отправлено!</h3>
+        <p>Спасибо — я отвечу вам в ближайшее время.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
      FOOTER
 ════════════════════════ -->
 </main>
@@ -1659,6 +1919,15 @@
 <div class="sticky-cta">
   <button class="btn-cta" onclick="openModal()">Записаться на бесплатный урок</button>
 </div>
+
+<!-- ════════════════════════
+     SCROLL TO TOP
+════════════════════════ -->
+<button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Наверх">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6,15 12,9 18,15"/>
+  </svg>
+</button>
 
 
 <!-- ════════════════════════
@@ -1704,6 +1973,8 @@
   const orbs = document.querySelectorAll('.orb');
   let ticking = false;
 
+  const scrollTopBtn = document.getElementById('scrollTop');
+
   function onScroll() {
     const scrollY = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1716,6 +1987,11 @@
     // Прозрачность шапки
     navbar.classList.toggle('scrolled', scrollY > 40);
 
+    // Кнопка «наверх»
+    if (scrollTopBtn) {
+      scrollTopBtn.classList.toggle('show', scrollY > 400);
+    }
+
     // Параллакс на орбах — каждый со своей скоростью
     orbs.forEach(orb => {
       const speed = parseFloat(orb.dataset.parallax) || 0.3;
@@ -1723,6 +1999,28 @@
     });
 
     ticking = false;
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── Мобильное меню ── */
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.getElementById('navBurger');
+    const isOpen = menu.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.getElementById('navBurger');
+    menu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }
 
   window.addEventListener('scroll', () => {
@@ -1850,6 +2148,39 @@
         document.getElementById('modalSuccess').style.display = 'none';
       }, 400);
     }, 3500);
+  }
+
+  /* ── Форма обратной связи ── */
+  function handleFeedback(e) {
+    e.preventDefault();
+    const form = document.getElementById('feedbackForm');
+    const success = document.getElementById('feedbackSuccess');
+
+    form.style.display = 'none';
+    success.style.display = 'block';
+
+    // Конфетти-разлёт
+    const colors = ['#FF6B2B', '#ff9a62', '#4CAF50', '#ffd166', '#ffffff'];
+    for (let i = 0; i < 24; i++) {
+      const c = document.createElement('span');
+      c.className = 'confetti';
+      c.style.background = colors[i % colors.length];
+      const angle = (Math.PI * 2 * i) / 24 + Math.random() * 0.3;
+      const dist = 120 + Math.random() * 140;
+      c.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+      c.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+      c.style.setProperty('--tr', (Math.random() * 720 - 360) + 'deg');
+      success.appendChild(c);
+    }
+    requestAnimationFrame(() => success.classList.add('go'));
+
+    setTimeout(() => {
+      form.reset();
+      success.classList.remove('go');
+      success.querySelectorAll('.confetti').forEach(c => c.remove());
+      form.style.display = '';
+      success.style.display = 'none';
+    }, 6000);
   }
 </script>
 
