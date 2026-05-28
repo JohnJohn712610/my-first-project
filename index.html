@@ -6,8 +6,11 @@
   <meta name="description" content="Онлайн-уроки английского для детей 7–17 лет. Первый урок бесплатно. Подготовка к ОГЭ и ЕГЭ.">
   <title>ИН.ЯЗ — Онлайн-репетитор английского для детей</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500&display=swap">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500&display=swap');
 
     /* ─── RESET & BASE ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -319,13 +322,15 @@
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
+      contain: layout paint;
     }
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: .55;
+      filter: blur(50px);
+      opacity: .45;
       will-change: transform;
+      transform: translateZ(0);
     }
     .orb-1 {
       width: 520px; height: 520px;
@@ -1302,6 +1307,14 @@
       .sticky-cta { display: block; }
       body { padding-bottom: 80px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none !important; }
+      .btn-cta { animation: none !important; }
+      .scroll-progress { animation: none !important; }
+      .hero h1 span { animation: none !important; }
+      .fade-up { transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -1979,7 +1992,6 @@
   /* ── Navbar scroll + parallax + progress bar ── */
   const navbar = document.getElementById('navbar');
   const progressBar = document.getElementById('scrollProgress');
-  const orbs = document.querySelectorAll('.orb');
   let ticking = false;
 
   const scrollTopBtn = document.getElementById('scrollTop');
@@ -1988,24 +2000,15 @@
     const scrollY = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-    // Прогресс-бар
     if (progressBar) {
       progressBar.style.width = (scrollY / docHeight * 100) + '%';
     }
 
-    // Прозрачность шапки
     navbar.classList.toggle('scrolled', scrollY > 40);
 
-    // Кнопка «наверх»
     if (scrollTopBtn) {
       scrollTopBtn.classList.toggle('show', scrollY > 400);
     }
-
-    // Параллакс на орбах — каждый со своей скоростью
-    orbs.forEach(orb => {
-      const speed = parseFloat(orb.dataset.parallax) || 0.3;
-      orb.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
-    });
 
     ticking = false;
   }
